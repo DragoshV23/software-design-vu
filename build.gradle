@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 group 'org.example'
@@ -16,5 +18,13 @@ repositories {
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
-
+    implementation group: 'com.github.almasb', name: 'fxgl', version: '11.17'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: '11'
 }
+
+javafx {
+    version = "19"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+mainClassName = 'softwaredesign.MainApp'
