@@ -17,7 +17,7 @@ public class SimpleFactory implements EntityFactory {
     @Spawns("Tamagotchi")
     public Entity newTamagotchi(SpawnData data) {
         return FXGL.entityBuilder(data)
-                .view(new Circle(12, Color.GREEN))
+                .view("testotchi.png")
                 .with(new ProjectileComponent(new Point2D(1,0), 69))
                 .build();
     }
