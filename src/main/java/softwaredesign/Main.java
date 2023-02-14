@@ -18,6 +18,13 @@ public class Main extends GameApplication {
 
     }
 
+    @Override
+    protected void initGame() {
+        FXGL.getGameWorld().addEntityFactory(new SimpleFactory());
+
+        FXGL.spawn("Tamagotchi", 100, 100);
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
