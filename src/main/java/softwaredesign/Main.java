@@ -9,8 +9,9 @@ public class Main extends GameApplication {
 
     @Override
     protected void initSettings(GameSettings settings){
-        settings.setHeight(37 * 4);
-        settings.setWidth(32 * 4);
+        settings.setTitle("Office Pets");
+        settings.setHeight(37 * 16);
+        settings.setWidth(32 * 16);
     }
 
     private Entity pet;
@@ -18,7 +19,7 @@ public class Main extends GameApplication {
     @Override
     protected void initGame() {
         pet = FXGL.entityBuilder()
-                .at(32,35)
+                .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 8)
                 .with(new AnimationComponent())
                 .buildAndAttach();
     }

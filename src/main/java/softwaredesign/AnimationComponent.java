@@ -13,7 +13,7 @@ public class AnimationComponent extends Component {
     private final AnimationChannel animIdle;
 
     public AnimationComponent() {
-        animIdle = new AnimationChannel(FXGL.image("kipIdle.png"), 2, 16 * 4, 16 * 4, Duration.seconds(1), 0, 1);
+        animIdle = new AnimationChannel(FXGL.image("kipIdle.png"), 2, 16 * 16, 16 * 16, Duration.seconds(1), 0, 1);
         texture = new AnimatedTexture(animIdle);
         texture.loopAnimationChannel(animIdle);
     }
