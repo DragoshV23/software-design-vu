@@ -8,14 +8,17 @@ import com.almasb.fxgl.entity.Entity;
 public class Main extends GameApplication {
 
     @Override
-    protected void initSettings(GameSettings settings){ }
+    protected void initSettings(GameSettings settings){
+        settings.setHeight(37 * 4);
+        settings.setWidth(32 * 4);
+    }
 
     private Entity pet;
 
     @Override
     protected void initGame() {
         pet = FXGL.entityBuilder()
-                .at(200,200)
+                .at(32,35)
                 .with(new AnimationComponent())
                 .buildAndAttach();
     }
