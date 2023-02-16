@@ -6,6 +6,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.dsl.FXGL;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -46,11 +47,24 @@ public class Main extends GameApplication {
     @Override
     protected void initUI() {
 
+        //Set up the top ui
+        VBox topUi = new VBox();
+        topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
+        topUi.setStyle("-fx-background-color: #1a1a1a;");
+        topUi.setAlignment(Pos.CENTER);
+
+        HBox clockBar = new HBox();
+        clockBar.setPrefSize(FXGL.getAppWidth(), 8 * 16);
+        clockBar.setStyle("-fx-background-color: #00ff00;");
+        clockBar.setAlignment(Pos.CENTER);
+        topUi.getChildren().add(clockBar);
+
         // Set up the top bar
         HBox topBar = new HBox();
-        topBar.setPrefSize(FXGL.getAppWidth(), 14 * 16);
+        topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
         topBar.setStyle("-fx-background-color: #1a1a1a;");
-        topBar.setAlignment(Pos.BOTTOM_CENTER);
+        topBar.setAlignment(Pos.CENTER);
+        topUi.getChildren().add(topBar);
 
         // Add buttons to the top bar
         for (int i = 0; i < BUTTON_COUNT; i++) {
@@ -74,9 +88,9 @@ public class Main extends GameApplication {
 
         // Add the bars to the UI
         VBox ui = new VBox();
-        ui.getChildren().addAll(topBar, bottomBar);
+        ui.getChildren().addAll(topUi, bottomBar);
         ui.setAlignment(Pos.CENTER);
-        ui.setSpacing(FXGL.getAppHeight() - topBar.getPrefHeight() - bottomBar.getPrefHeight());
+        ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
 
         // Add the UI to the game scene
         FXGL.getGameScene().addUINode(ui);
