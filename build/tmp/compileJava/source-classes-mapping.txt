@@ -1,4 +1,4 @@
-softwaredesign/AnimationComponent.java
- softwaredesign.AnimationComponent
 softwaredesign/Main.java
  softwaredesign.Main
+softwaredesign/AnimationComponent.java
+ softwaredesign.AnimationComponent

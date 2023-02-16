@@ -6,19 +6,29 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.dsl.FXGL;
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
+
+import java.time.LocalTime;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class Main extends GameApplication {
 
     private static final int BUTTON_COUNT = 4;
+    private AnimationTimer stopwatchTimer;
+    private long stopwatchStartTime;
 
     @Override
     protected void initSettings(GameSettings settings){
@@ -58,6 +68,24 @@ public class Main extends GameApplication {
         clockBar.setStyle("-fx-background-color: #00ff00;");
         clockBar.setAlignment(Pos.CENTER);
         topUi.getChildren().add(clockBar);
+
+        Label timerLabel = new Label("00:00:00");
+
+        timerLabel.setText("00:00:00");
+        final LocalTime[] time = {LocalTime.MIDNIGHT};
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            time[0] = time[0].plusSeconds(1);
+            timerLabel.setText(String.format("%02d:%02d:%02d",
+                    time[0].getHour(),
+                    time[0].getMinute(),
+                    time[0].getSecond()
+            ));
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+        clockBar.getChildren().add(timerLabel);
 
         // Set up the top bar
         HBox topBar = new HBox();
