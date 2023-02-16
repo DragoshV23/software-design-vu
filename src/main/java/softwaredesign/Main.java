@@ -35,7 +35,7 @@ public class Main extends GameApplication {
 
         // Spawn pet
         pet = FXGL.entityBuilder()
-                .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 8)
+                .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 4)
                 .with(new AnimationComponent())
                 .buildAndAttach();
     }
@@ -48,31 +48,27 @@ public class Main extends GameApplication {
 
         // Set up the top bar
         HBox topBar = new HBox();
-        topBar.setPrefSize(FXGL.getAppWidth(), 96);
+        topBar.setPrefSize(FXGL.getAppWidth(), 14 * 16);
         topBar.setStyle("-fx-background-color: #1a1a1a;");
-        topBar.setAlignment(Pos.CENTER);
+        topBar.setAlignment(Pos.BOTTOM_CENTER);
 
         // Add buttons to the top bar
         for (int i = 0; i < BUTTON_COUNT; i++) {
-            Button button = new Button("Button " + (i+1));
-            button.setPrefSize(FXGL.getAppWidth() / BUTTON_COUNT, 64);
-            button.setStyle("-fx-background-color: #3f3f3f; -fx-text-fill: white;");
-            button.setAlignment(Pos.CENTER);
+            Button button = new Button("Button " + (i + 1));
+            button.setPrefSize(100, 50);
             topBar.getChildren().add(button);
         }
 
         // Set up the bottom bar
         HBox bottomBar = new HBox();
-        bottomBar.setPrefSize(FXGL.getAppWidth(), 96);
+        bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
         bottomBar.setStyle("-fx-background-color: #1a1a1a;");
         bottomBar.setAlignment(Pos.CENTER);
 
         // Add buttons to the bottom bar
         for (int i = 0; i < BUTTON_COUNT; i++) {
-            Button button = new Button("Button " + (i+1));
-            button.setPrefSize(FXGL.getAppWidth() / BUTTON_COUNT, 64);
-            button.setStyle("-fx-background-color: #3f3f3f; -fx-text-fill: white;");
-            button.setAlignment(Pos.CENTER);
+            Button button = new Button("Button " + (i + 1));
+            button.setPrefSize(100, 50);
             bottomBar.getChildren().add(button);
         }
 
