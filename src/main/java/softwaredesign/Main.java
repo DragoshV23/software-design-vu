@@ -21,6 +21,8 @@ public class Main extends GameApplication {
 
     @Override
     protected void initSettings(GameSettings settings){
+
+        // Config window size
         settings.setTitle("Office Pets");
         settings.setHeight(37 * 16);
         settings.setWidth(32 * 16);
@@ -30,6 +32,8 @@ public class Main extends GameApplication {
 
     @Override
     protected void initGame() {
+
+        // Spawn pet
         pet = FXGL.entityBuilder()
                 .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 8)
                 .with(new AnimationComponent())
