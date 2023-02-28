@@ -13,6 +13,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -22,6 +24,8 @@ import javafx.util.Duration;
 
 import java.time.LocalTime;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static com.almasb.fxgl.dsl.FXGL.getAssetLoader;
 
 
 public class Main extends GameApplication {
@@ -57,12 +61,13 @@ public class Main extends GameApplication {
     @Override
     protected void initUI() {
 
-        //Set up the top ui
+        // Set up the top ui
         VBox topUi = new VBox();
         topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
         topUi.setStyle("-fx-background-color: #1a1a1a;");
         topUi.setAlignment(Pos.CENTER);
 
+        // Creating clock
         HBox clockBar = new HBox();
         clockBar.setPrefSize(FXGL.getAppWidth(), 8 * 16);
         clockBar.setStyle("-fx-background-color: #00ff00;");
@@ -96,8 +101,13 @@ public class Main extends GameApplication {
 
         // Add buttons to the top bar
         for (int i = 0; i < BUTTON_COUNT; i++) {
-            Button button = new Button("Button " + (i + 1));
-            button.setPrefSize(100, 50);
+            Button button = new Button();
+            Image iconImage = getAssetLoader().loadImage("fork.png"); // load your icon image
+            ImageView iconView = new ImageView(iconImage);
+            iconView.setFitHeight(80);
+            iconView.setFitWidth(80);
+            button.setGraphic(iconView);
+            button.setPrefSize(80, 80);
             topBar.getChildren().add(button);
         }
 
@@ -109,8 +119,13 @@ public class Main extends GameApplication {
 
         // Add buttons to the bottom bar
         for (int i = 0; i < BUTTON_COUNT; i++) {
-            Button button = new Button("Button " + (i + 1));
-            button.setPrefSize(100, 50);
+            Button button = new Button();
+            Image iconImage = getAssetLoader().loadImage("fork.png"); // load your icon image
+            ImageView iconView = new ImageView(iconImage);
+            iconView.setFitHeight(80);
+            iconView.setFitWidth(80);
+            button.setGraphic(iconView);
+            button.setPrefSize(80, 80);
             bottomBar.getChildren().add(button);
         }
 
