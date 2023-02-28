@@ -1,4 +1,9 @@
-softwaredesign/AnimationComponent.java
- softwaredesign.AnimationComponent
+softwaredesign/Animation.java
+ softwaredesign.Animation
 softwaredesign/Main.java
  softwaredesign.Main
+softwaredesign/AnimationComponent.java
+ softwaredesign.AnimationComponent
+softwaredesign/Pet.java
+ softwaredesign.Pet
+ softwaredesign.Race

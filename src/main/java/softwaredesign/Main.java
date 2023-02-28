@@ -4,12 +4,8 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.app.GameApplication;
-import com.almasb.fxgl.dsl.FXGL;
-import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,22 +13,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
-
 import java.time.LocalTime;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.almasb.fxgl.dsl.FXGL.getAssetLoader;
-
 
 public class Main extends GameApplication {
 
     private static final int BUTTON_COUNT = 4;
-    private AnimationTimer stopwatchTimer;
-    private long stopwatchStartTime;
 
     @Override
     protected void initSettings(GameSettings settings){
@@ -43,15 +33,16 @@ public class Main extends GameApplication {
         settings.setWidth(32 * 16);
     }
 
-    private Entity pet;
+    private Entity petEntity;
 
     @Override
     protected void initGame() {
 
         // Spawn pet
-        pet = FXGL.entityBuilder()
+        Pet pet = new Pet();
+        petEntity = FXGL.entityBuilder()
                 .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 4)
-                .with(new AnimationComponent())
+                .with(new AnimationComponent(pet))
                 .buildAndAttach();
     }
 
@@ -139,7 +130,12 @@ public class Main extends GameApplication {
         FXGL.getGameScene().addUINode(ui);
     }
 
+    static void createAnimations() {
+
+    }
+
     public static void main(String[] args) {
+        createAnimations();
         launch(args);
     }
 }
