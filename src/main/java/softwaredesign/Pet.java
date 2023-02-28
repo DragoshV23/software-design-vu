@@ -2,7 +2,7 @@ package softwaredesign;
 import java.util.Random;
 
 enum Race { KIP, GOAT, DINO, CAT }
-enum LifeStage { KID, ADULT }
+enum LifeStage { EGG, KID, ADULT }
 
 public class Pet {
     private Race race;
