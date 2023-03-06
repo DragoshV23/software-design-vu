@@ -1,27 +1,28 @@
 package softwaredesign;
 import java.util.Random;
 
-enum Race { KIP, GOAT, DINO, CAT }
+
+enum Race { ALL, KIP, GOAT, DINO, CAT }
 enum LifeStage { EGG, KID, ADULT }
 
 public class Pet {
     private Race race;
     private LifeStage stage;
-    private double health;
-    private double energy;
-    private double mood;
-    private double hunger;
+    private int health;
+    private int energy;
+    private int mood;
+    private int hunger;
     private int age;
     private boolean alive;
 
     public Pet() {
-        race = randGenRace();
+        race = Race.KIP; // randGenRace();
         stage = LifeStage.KID;
-        health = 100.0;
-        energy = 100.0;
-        mood = 100.0;
-        hunger = 100.0;
-        age = 0;
+        health = 100;
+        energy = 100;
+        mood = 100;
+        hunger = 100;
+        age = -1;
         alive = true;
     }
 
@@ -33,5 +34,6 @@ public class Pet {
     }
 
     public Race getRace() {return race; }
+    public int getAge() {return age; }
 
 }

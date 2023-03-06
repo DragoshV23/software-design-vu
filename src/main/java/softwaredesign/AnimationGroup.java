@@ -1,7 +1,29 @@
 package softwaredesign;
 
+import javafx.util.Duration;
+
 import java.util.ArrayList;
 
 public class AnimationGroup {
     ArrayList<Animation> group = new ArrayList<>();
+
+    public AnimationGroup(Pet pet) {
+        Animation eggAnimation = new Animation(pet, LifeStage.EGG, State.IDLE, "eggHatch.png",
+                7, Duration.seconds(10));
+        group.add(eggAnimation);
+        switch (pet.getRace()) {
+            case KIP:
+                Animation babyIdle = new Animation(pet, LifeStage.KID, State.IDLE, "kipIdle_b.png", 2,
+                        Duration.seconds(1));
+                Animation babySleep = new Animation(pet, LifeStage.KID, State.SLEEP, "kipSleep_b.png", 20,
+                        Duration.seconds(1));
+                Animation babyAngry = new Animation(pet, LifeStage.KID, State.ANGRY, "kipAngry_b.png", 12,
+                        Duration.seconds(1));
+                group.add(babyIdle);
+                group.add(babySleep);
+                group.add(babyAngry);
+                break;
+        }
+    }
+
 }
