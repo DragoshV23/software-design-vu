@@ -15,8 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import static com.almasb.fxgl.dsl.FXGL.getAssetLoader;
 
@@ -130,12 +128,7 @@ public class Main extends GameApplication {
         FXGL.getGameScene().addUINode(ui);
     }
 
-    static void createAnimations() {
-
-    }
-
     public static void main(String[] args) {
-        createAnimations();
         launch(args);
     }
 }
