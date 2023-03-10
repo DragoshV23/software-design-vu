@@ -24,7 +24,7 @@ public class AnimationGroup {
                 Animation adultSleep = new Animation(pet, LifeStage.ADULT, State.SLEEP, "kipSleep_a.png", 20,
                         Duration.seconds(10));
                 Animation adultAngry = new Animation(pet, LifeStage.ADULT, State.ANGRY, "kipAngry_a.png", 8,
-                        Duration.seconds(4));
+                        Duration.seconds(2));
                 group.add(babyIdle);
                 group.add(babySleep);
                 group.add(babyAngry);

@@ -18,12 +18,12 @@ public class Pet {
 
     public Pet() {
         race = Race.KIP; // randGenRace();
-        state = State.IDLE;
+        state = State.ANGRY;
         health = 100;
         energy = 100;
         mood = 100;
         hunger = 100;
-        age = -1;
+        age = 4;
         stage = calcLifeStage(age);
         alive = true;
     }
