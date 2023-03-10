@@ -1,0 +1,41 @@
+
+|
+java:S1192?"_Define a constant instead of duplicating this literal "-fx-background-color: #1a1a1a;" 3 times.(øç¬Ú8û…ˆç0
+b
+java:S21841"ECast one of the operands of this subtraction operation to a "double".(¦Ÿ¦ç8ı…ˆç0
+b
+java:S21841"ECast one of the operands of this subtraction operation to a "double".(¦Ÿ¦ç8ı…ˆç0
+j
+java:S2184>"HCast one of the operands of this multiplication operation to a "double".(×“°²ùÿÿÿÿ8ı…ˆç0
+e
+java:S2184C"HCast one of the operands of this multiplication operation to a "double".(˜µİ8ş…ˆç0
+e
+java:S2184\"HCast one of the operands of this multiplication operation to a "double".(ÌêÃ¸8ş…ˆç0
+j
+java:S2184j"HCast one of the operands of this multiplication operation to a "double".(÷¹Şñûÿÿÿÿ8ş…ˆç0
+£
+java:S11867"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Üñª–úÿÿÿÿ8«†ˆç0
+t
+java:S1450*"RRemove the "pet" field and declare it as a local variable in the relevant methods.(§¥¦ùÿÿÿÿ8¬†ˆç0
+g
+java:S3252U"EUse static access with "javafx.animation.Animation" for "INDEFINITE".(Êı şÿÿÿÿ8¶†ˆç0
+@
+java:S1128"Remove this duplicated import.(¶ï¾æøÿÿÿÿ8–÷“ˆç0
+@
+java:S1128"Remove this duplicated import.(ÁÈÌïùÿÿÿÿ8öœˆç0
+U
+java:S1128"3Remove this unused import 'javafx.geometry.Insets'.(›¨µğûÿÿÿÿ8÷œˆç0
+R
+java:S1128"5Remove this unused import 'javafx.scene.paint.Color'.(Ïî£à8¼†ˆç0
+P
+java:S1128"3Remove this unused import 'javafx.scene.text.Font'.(¾¼¡Ê8½†ˆç0
+U
+java:S1128"3Remove this unused import 'javafx.scene.text.Text'.(˜ÿ‡Üşÿÿÿÿ8½†ˆç0
+e
+java:S1128"HRemove this unused import 'java.util.concurrent.atomic.AtomicReference'.(×‡µó8øœˆç0
+T
+java:S1068"2Remove this unused "stopwatchTimer" private field.(Ì¡…´üÿÿÿÿ8½†ˆç0
+X
+java:S1068"6Remove this unused "stopwatchStartTime" private field.(‰îñùÿÿÿÿ8¾†ˆç0
+I
+java:S1068*"'Remove this unused "pet" private field.(§¥¦ùÿÿÿÿ8¾†ˆç0
