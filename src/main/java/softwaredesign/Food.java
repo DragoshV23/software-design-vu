@@ -1,6 +1,6 @@
 package softwaredesign;
 
-public class Food extends Item{
+public final class Food extends Item{
     int nutritionVal;
 
     public int getNutritionVal() {return nutritionVal; }

@@ -1,0 +1,16 @@
+
+Q	java:S125"<This block of commented-out lines of code should be removed.(ƒƒê¼
+3
+java:S2119!"Save and re-use this "Random".(¼İÅf
+@
+java:S1068"*Remove this unused "health" private field.(ßùı
+@
+java:S1068"*Remove this unused "energy" private field.(ÊãÙ¨
+C
+java:S1068"(Remove this unused "mood" private field.(Çï’ıÿÿÿÿ
+?
+java:S1068"*Remove this unused "hunger" private field.(Ç¼õq
+?
+java:S1068")Remove this unused "alive" private field.(©öÒ‚
+K
+java:S1144"0Remove this unused private "randGenRace" method.(­ë×ñşÿÿÿÿ
