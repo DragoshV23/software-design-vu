@@ -2,6 +2,7 @@ package softwaredesign;
 
 public final class Food extends Item{
     int nutritionVal;
+    int testVal;
 
     public int getNutritionVal() {return nutritionVal; }
 
