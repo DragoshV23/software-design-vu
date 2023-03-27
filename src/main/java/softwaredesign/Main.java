@@ -6,6 +6,8 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -31,17 +33,18 @@ public class Main extends GameApplication {
         settings.setWidth(32 * 16);
     }
 
-    private Entity petEntity;
+    Pet pet = new Pet();
+    Entity petEntity;
 
     @Override
     protected void initGame() {
 
         // Spawn pet
-        Pet pet = new Pet();
         petEntity = FXGL.entityBuilder()
                 .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 4)
                 .with(new AnimationComponent(pet))
                 .buildAndAttach();
+
     }
 
     @Override
@@ -97,6 +100,14 @@ public class Main extends GameApplication {
             iconView.setFitWidth(80);
             button.setGraphic(iconView);
             button.setPrefSize(80, 80);
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    pet.birthday();
+                    petEntity.getComponent(AnimationComponent.class).setAnim(pet);
+                    System.out.println(pet.getAge());
+                }
+            });
             topBar.getChildren().add(button);
         }
 
@@ -115,6 +126,12 @@ public class Main extends GameApplication {
             iconView.setFitWidth(80);
             button.setGraphic(iconView);
             button.setPrefSize(80, 80);
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    // TODO: stats popup window
+                }
+            });
             bottomBar.getChildren().add(button);
         }
 

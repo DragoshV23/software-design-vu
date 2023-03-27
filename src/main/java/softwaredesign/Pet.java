@@ -18,12 +18,12 @@ public class Pet {
 
     public Pet() {
         race = Race.KIP; // randGenRace();
-        state = State.ANGRY;
+        state = State.IDLE;
         health = 100;
         energy = 100;
         mood = 100;
         hunger = 100;
-        age = 4;
+        age = -1;
         stage = calcLifeStage(age);
         alive = true;
     }
@@ -50,7 +50,9 @@ public class Pet {
     }
 
     public void birthday() {
-        setAge(age + 1);
+        setAge(this.age + 1);
+        setStage(calcLifeStage(this.age));
+
     }
 
 
@@ -58,6 +60,7 @@ public class Pet {
     public int getAge() {return age; }
     public State getState() {return state; }
     public LifeStage getStage() {return stage; }
+    private void setStage(LifeStage stage) {this.stage = stage; }
 
     public void setAge(int age) {
         this.age = age;

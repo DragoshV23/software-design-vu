@@ -1,14 +1,32 @@
 softwaredesign/AnimationGroup.java
  softwaredesign.AnimationGroup
  softwaredesign.AnimationGroup$1
+softwaredesign/Item.java
+ softwaredesign.Item
 softwaredesign/Animation.java
  softwaredesign.Animation
  softwaredesign.State
-softwaredesign/Main.java
- softwaredesign.Main
+softwaredesign/RPS.java
+ softwaredesign.Choice
+ softwaredesign.Outcome
+ softwaredesign.RPS
+softwaredesign/User.java
+ softwaredesign.User
+softwaredesign/Shop.java
+ softwaredesign.Shop
 softwaredesign/AnimationComponent.java
  softwaredesign.AnimationComponent
+softwaredesign/Food.java
+ softwaredesign.Food
+softwaredesign/Background.java
+ softwaredesign.Background
+softwaredesign/MiniGame.java
+ softwaredesign.MiniGame
 softwaredesign/Pet.java
  softwaredesign.LifeStage
  softwaredesign.Pet
  softwaredesign.Race
+softwaredesign/Main.java
+ softwaredesign.Main
+ softwaredesign.Main$1
+ softwaredesign.Main$2

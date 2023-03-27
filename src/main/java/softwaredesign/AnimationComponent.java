@@ -12,18 +12,21 @@ public class AnimationComponent extends Component {
     public static final int frameH = 16 * 16;
 
 
-    private final AnimatedTexture texture;
+    private AnimatedTexture texture;
     private AnimationChannel curAnim;
+    private AnimationGroup petAG;
 
     public AnimationComponent(Pet pet) {
-        AnimationGroup petAG = new AnimationGroup(pet);
-        setAnim(pet, petAG);
+        petAG = new AnimationGroup(pet);
+        selectAnim(pet, petAG);
         texture = new AnimatedTexture(curAnim);
         texture.loopAnimationChannel(curAnim);
     }
 
-    private void setAnim(Pet pet, AnimationGroup animGroup) {
-        selectAnim(pet, animGroup);
+    public void setAnim(Pet pet) {
+        selectAnim(pet, petAG);
+        texture.set(new AnimatedTexture(curAnim));
+        texture.loopAnimationChannel(curAnim);
 
     }
     private int searchAnimIndex(Pet pet, AnimationGroup animGroup) {
@@ -47,5 +50,4 @@ public class AnimationComponent extends Component {
     public void onAdded() {
         entity.getViewComponent().addChild(texture);
     }
-
 }
