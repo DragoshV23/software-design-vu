@@ -20,14 +20,14 @@ softwaredesign/AnimationGroup.java
 softwaredesign/Animation.java
  softwaredesign.Animation
  softwaredesign.State
+softwaredesign/Main.java
+ softwaredesign.Main
+ softwaredesign.Main$1
+ softwaredesign.Main$2
+softwaredesign/AnimationComponent.java
+ softwaredesign.AnimationComponent
 softwaredesign/Pet.java
  softwaredesign.Gender
  softwaredesign.LifeStage
  softwaredesign.Pet
  softwaredesign.Race
-softwaredesign/AnimationComponent.java
- softwaredesign.AnimationComponent
-softwaredesign/Main.java
- softwaredesign.Main
- softwaredesign.Main$1
- softwaredesign.Main$2
