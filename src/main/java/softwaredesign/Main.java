@@ -128,66 +128,57 @@ public class Main extends GameApplication {
         topBar.setAlignment(Pos.CENTER);
         topUi.getChildren().add(topBar);
 
-        // Add buttons to the top bar
-        for (int i = 0; i < BUTTON_COUNT; i++) {
-            Button button = new Button();
-            Image iconImage = getAssetLoader().loadImage("fork.png"); // load your icon image
-            ImageView iconView = new ImageView(iconImage);
-            iconView.setFitHeight(80);
-            iconView.setFitWidth(80);
-            button.setGraphic(iconView);
-            button.setPrefSize(80, 80);
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    pet.birthday();
-                    petEntity.getComponent(AnimationComponent.class).setAnim(pet);
-                }
-            });
-            topBar.getChildren().add(button);
-        }
-
         // Set up the bottom bar
         HBox bottomBar = new HBox();
         bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
         bottomBar.setStyle("-fx-background-color: #1a1a1a;");
         bottomBar.setAlignment(Pos.CENTER);
 
-        // Add buttons to the bottom bar
-        for (int i = 0; i < BUTTON_COUNT; i++) {
-            Button button = new Button();
-            Image iconImage = getAssetLoader().loadImage("fork.png"); // load your icon image
-            ImageView iconView = new ImageView(iconImage);
-            iconView.setFitHeight(80);
-            iconView.setFitWidth(80);
-            button.setGraphic(iconView);
-            button.setPrefSize(80, 80);
+        //TOP BUTTONS
+        Button button1 = createIconButton("fork.png", topBar);
+        Button button2 = createIconButton("eggHatch.png", topBar);
+        Button button3 = createIconButton("kipAngry_a.png", topBar);
+        Button button4 = createIconButton("kipAngry_b.png", topBar);
 
-            //popup
-            Popup popup = new Popup();
-            Label popupLabel = new Label();
-            popupLabel.setText("Pet Stats:");
-            popupLabel.setMinWidth(300);
-            popupLabel.setMinHeight(380);
-//            FXGL.getPrimaryStage().setX(0);   //does weird shit
-//            FXGL.getPrimaryStage().setY(30);
-            popupLabel.setStyle("-fx-background-color:#FAF9F6; -fx-font-size:25");
-            popupLabel.setPadding(new Insets(20));
-            popup.getContent().add(popupLabel);
+        //BOTTOM BUTTONS
+        Button button5 = createIconButton("fork.png", bottomBar);
+        Button button6 = createIconButton("eggHatch.png", bottomBar);
+        Button button7 = createIconButton("kipAngry_a.png", bottomBar);
+        Button button8 = createIconButton("kipAngry_b.png", bottomBar);
 
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    if(!popup.isShowing()){
-                        popup.show(FXGL.getPrimaryStage());
-                    }
-                    else{
-                        popup.hide();
-                    }
+        //popup
+        Popup popup = new Popup();
+        Label popupLabel = new Label();
+        popupLabel.setText("Pet Stats:");
+        popupLabel.setMinWidth(300);
+        popupLabel.setMinHeight(380);
+        //FXGL.getPrimaryStage().setX(0);   //does weird shit
+        //FXGL.getPrimaryStage().setY(30);
+        popupLabel.setStyle("-fx-background-color:#FAF9F6; -fx-font-size:25");
+        popupLabel.setPadding(new Insets(20));
+        popup.getContent().add(popupLabel);
+
+        button8.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if(!popup.isShowing()){
+                    popup.show(FXGL.getPrimaryStage());
                 }
-            });
-            bottomBar.getChildren().add(button);
-        }
+                else{
+                    popup.hide();
+                }
+            }
+        });
+
+        //adds 1 age to pet
+        button4.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                pet.birthday();
+                petEntity.getComponent(AnimationComponent.class).setAnim(pet);
+                System.out.println(pet.getAge());
+            }
+        });
 
         // Add the bars to the UI
         VBox ui = new VBox();
@@ -197,6 +188,18 @@ public class Main extends GameApplication {
 
         // Add the UI to the game scene
         FXGL.getGameScene().addUINode(ui);
+    }
+
+    private Button createIconButton(String imageName, HBox bar) {
+        Button button = new Button();
+        Image icon = getAssetLoader().loadImage(imageName);
+        ImageView iconView = new ImageView(icon);
+        iconView.setFitHeight(80);
+        iconView.setFitWidth(80);
+        button.setGraphic(iconView);
+        button.setPrefSize(80, 80);
+        bar.getChildren().add(button);
+        return button;
     }
 
     public static void main(String[] args) {
