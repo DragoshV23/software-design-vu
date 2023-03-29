@@ -149,7 +149,11 @@ public class Main extends GameApplication {
         //popup
         Popup popup = new Popup();
         Label popupLabel = new Label();
-        popupLabel.setText(pet.getName() + " stats: \n" + "Mood: " + pet.getMood() + "\nHealth: " + pet.getHealth() + "\nHunger: " + pet.getHunger() + "\nEnergy: " + pet.getEnergy());
+        popupLabel.setText(pet.getName() + " stats: " +
+                "\nMood: " + pet.getMood() +
+                "\nHealth: " + pet.getHealth() +
+                "\nHunger: " + pet.getHunger() +
+                "\nEnergy: " + pet.getEnergy());
 
         popupLabel.setMinWidth(300);
         popupLabel.setMinHeight(380);
