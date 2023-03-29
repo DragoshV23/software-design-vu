@@ -71,6 +71,10 @@ public class Pet implements Serializable {
     public LifeStage getStage() {return stage; }
     public Gender getGender() {return gender; }
     public String getName() {return name; }
+    public int getHealth() {return health; }
+    public int getEnergy() {return energy; }
+    public int getMood() {return mood; }
+    public int getHunger() {return hunger; }
     private void setStage(LifeStage stage) {this.stage = stage; }
 
     public void setAge(int age) {
