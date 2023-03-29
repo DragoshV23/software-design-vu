@@ -4,11 +4,14 @@ import java.util.Random;
 
 enum Race { ALL, KIP, GOAT, DINO, CAT }
 enum LifeStage { EGG, KID, ADULT }
+enum Gender {MALE, FEMALE}
 
 public class Pet {
+    private String name;
     private Race race;
     private LifeStage stage;
     private State state;
+    private Gender gender;
     private int health;
     private int energy;
     private int mood;
@@ -19,6 +22,7 @@ public class Pet {
     public Pet() {
         race = Race.KIP; // randGenRace();
         state = State.IDLE;
+        gender = randGenGender();
         health = 100;
         energy = 100;
         mood = 100;
@@ -33,6 +37,12 @@ public class Pet {
         Random random = new Random();
         int randomIndex = random.nextInt(races.length);
         return races[randomIndex];
+    }
+    private static Gender randGenGender() {
+        Gender[] gender = Gender.values();
+        Random random = new Random();
+        int randomIndex = random.nextInt(gender.length);
+        return gender[randomIndex];
     }
     private static LifeStage calcLifeStage(int age) {
         switch (age) {
@@ -52,19 +62,20 @@ public class Pet {
     public void birthday() {
         setAge(this.age + 1);
         setStage(calcLifeStage(this.age));
-
     }
-
 
     public Race getRace() {return race; }
     public int getAge() {return age; }
     public State getState() {return state; }
     public LifeStage getStage() {return stage; }
+    public Gender getGender() {return gender; }
+    public String getName() {return name; }
     private void setStage(LifeStage stage) {this.stage = stage; }
 
     public void setAge(int age) {
         this.age = age;
     }
+    public void setName(String name) { this.name = name; }
 
 
 

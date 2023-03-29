@@ -4,21 +4,33 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.input.Input;
+import com.almasb.fxgl.input.UserAction;
+import com.almasb.fxgl.input.view.KeyView;
+import com.almasb.fxgl.input.view.MouseButtonView;
+import com.almasb.fxgl.ui.DialogBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import java.time.LocalTime;
+import java.util.Optional;
+
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -43,14 +55,35 @@ public class Main extends GameApplication {
 
     @Override
     protected void initGame() {
-
         // Spawn pet
         petEntity = FXGL.entityBuilder()
                 .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 4)
                 .with(new AnimationComponent(pet))
                 .buildAndAttach();
-    }
 
+        // Hatch after 10 sec
+        getGameTimer().runOnceAfter(() -> {
+            Platform.runLater(() -> {
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("Your pet hatched!");
+                dialog.setHeaderText("Race: " + pet.getRace());
+                Image src = getAssetLoader().loadImage("female.png");
+                if (pet.getGender() == Gender.MALE) {
+                    src = getAssetLoader().loadImage("male.png");
+                }
+                dialog.setGraphic(new ImageView(src));
+                dialog.setContentText("Name your pet:");
+                Optional<String> result = dialog.showAndWait();
+                if (result.isPresent() && !result.get().isEmpty()) {
+                    String petName = result.get();
+                    pet.setName(petName);
+                }
+            });
+            // Check if user entered a name and set the pet's name
+            pet.birthday();
+            petEntity.getComponent(AnimationComponent.class).setAnim(pet);
+        }, Duration.seconds(10));
+    }
     @Override
     protected  void initInput() {}
 
@@ -109,7 +142,6 @@ public class Main extends GameApplication {
                 public void handle(ActionEvent actionEvent) {
                     pet.birthday();
                     petEntity.getComponent(AnimationComponent.class).setAnim(pet);
-                    System.out.println(pet.getAge());
                 }
             });
             topBar.getChildren().add(button);
