@@ -24,7 +24,10 @@ softwaredesign/Main.java
  softwaredesign.Main
  softwaredesign.Main$1
  softwaredesign.Main$2
+<<<<<<< HEAD
  softwaredesign.Main$3
+=======
+>>>>>>> a811f8e10e8fc0b04749bb41398bc27cc8bb01cc
 softwaredesign/AnimationComponent.java
  softwaredesign.AnimationComponent
 softwaredesign/Pet.java

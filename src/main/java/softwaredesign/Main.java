@@ -203,7 +203,7 @@ public class Main extends GameApplication {
         //popup
         Popup popup = new Popup();
         Label popupLabel = new Label();
-        popupLabel.setText(pet.getName() + " stats: " +
+        popupLabel.setText("Pet stats: " +
                 "\nMood: " + pet.getMood() +
                 "\nHealth: " + pet.getHealth() +
                 "\nHunger: " + pet.getHunger() +
