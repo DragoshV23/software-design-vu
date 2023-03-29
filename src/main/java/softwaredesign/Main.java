@@ -149,11 +149,10 @@ public class Main extends GameApplication {
         //popup
         Popup popup = new Popup();
         Label popupLabel = new Label();
-        popupLabel.setText("Pet Stats:");
+        popupLabel.setText(pet.getName() + " stats: \n" + "Mood: " + pet.getMood() + "\nHealth: " + pet.getHealth() + "\nHunger: " + pet.getHunger() + "\nEnergy: " + pet.getEnergy());
+
         popupLabel.setMinWidth(300);
         popupLabel.setMinHeight(380);
-        //FXGL.getPrimaryStage().setX(0);   //does weird shit
-        //FXGL.getPrimaryStage().setY(30);
         popupLabel.setStyle("-fx-background-color:#FAF9F6; -fx-font-size:25");
         popupLabel.setPadding(new Insets(20));
         popup.getContent().add(popupLabel);
