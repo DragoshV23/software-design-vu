@@ -1,12 +1,13 @@
 package softwaredesign;
 import java.util.Random;
+import java.io.Serializable;
 
 
 enum Race { ALL, KIP, GOAT, DINO, CAT }
 enum LifeStage { EGG, KID, ADULT }
 enum Gender {MALE, FEMALE}
 
-public class Pet {
+public class Pet implements Serializable {
     private String name;
     private Race race;
     private LifeStage stage;

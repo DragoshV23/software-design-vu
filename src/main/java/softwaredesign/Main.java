@@ -2,12 +2,15 @@ package softwaredesign;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.core.serialization.Bundle;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.view.KeyView;
 import com.almasb.fxgl.input.view.MouseButtonView;
+import com.almasb.fxgl.profile.DataFile;
+import com.almasb.fxgl.profile.SaveLoadHandler;
 import com.almasb.fxgl.ui.DialogBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -28,7 +31,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import javafx.util.Duration;
+
+import java.io.*;
 import java.time.LocalTime;
+import java.util.Map;
 import java.util.Optional;
 
 import javafx.stage.Popup;
@@ -40,6 +46,8 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class Main extends GameApplication {
 
     private static final int BUTTON_COUNT = 4;
+    DataFile dataFile = new DataFile();
+
 
     @Override
     protected void initSettings(GameSettings settings){
@@ -50,39 +58,85 @@ public class Main extends GameApplication {
         settings.setWidth(32 * 16);
     }
 
+
     Pet pet = new Pet();
     Entity petEntity;
+    private void save() {
+        try {
+            FileOutputStream f = new FileOutputStream(new File("saveFile.txt"));
+            ObjectOutputStream o = new ObjectOutputStream(f);
+            o.writeObject(pet);
+            o.close();
+            f.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream");
+        }
+    }
+    private void load() {
+        try {
+
+            FileInputStream f = new FileInputStream(new File("saveFile.txt"));
+            ObjectInputStream o = new ObjectInputStream(f);
+
+            Pet petLoad = (Pet) o.readObject();
+            pet = petLoad;
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream");
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    @Override
+    protected void onPreInit() {
+
+    }
 
     @Override
     protected void initGame() {
-        // Spawn pet
-        petEntity = FXGL.entityBuilder()
-                .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 4)
-                .with(new AnimationComponent(pet))
-                .buildAndAttach();
+        File f = new File("saveFile.txt");
+        if(f.exists() && !f.isDirectory()) {
+            load();
+            // Spawn pet
+            petEntity = FXGL.entityBuilder()
+                    .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 4)
+                    .with(new AnimationComponent(pet))
+                    .buildAndAttach();
+        } else {
+            // Spawn pet
+            petEntity = FXGL.entityBuilder()
+                    .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 4)
+                    .with(new AnimationComponent(pet))
+                    .buildAndAttach();
 
-        // Hatch after 10 sec
-        getGameTimer().runOnceAfter(() -> {
-            Platform.runLater(() -> {
-                TextInputDialog dialog = new TextInputDialog();
-                dialog.setTitle("Your pet hatched!");
-                dialog.setHeaderText("Race: " + pet.getRace());
-                Image src = getAssetLoader().loadImage("female.png");
-                if (pet.getGender() == Gender.MALE) {
-                    src = getAssetLoader().loadImage("male.png");
-                }
-                dialog.setGraphic(new ImageView(src));
-                dialog.setContentText("Name your pet:");
-                Optional<String> result = dialog.showAndWait();
-                if (result.isPresent() && !result.get().isEmpty()) {
-                    String petName = result.get();
-                    pet.setName(petName);
-                }
-            });
-            // Check if user entered a name and set the pet's name
-            pet.birthday();
-            petEntity.getComponent(AnimationComponent.class).setAnim(pet);
-        }, Duration.seconds(10));
+            // Hatch after 10 sec
+            getGameTimer().runOnceAfter(() -> {
+                Platform.runLater(() -> {
+                    TextInputDialog dialog = new TextInputDialog();
+                    dialog.setTitle("Your pet hatched!");
+                    dialog.setHeaderText("Race: " + pet.getRace());
+                    Image src = getAssetLoader().loadImage("female.png");
+                    if (pet.getGender() == Gender.MALE) {
+                        src = getAssetLoader().loadImage("male.png");
+                    }
+                    dialog.setGraphic(new ImageView(src));
+                    dialog.setContentText("Name your pet:");
+                    Optional<String> result = dialog.showAndWait();
+                    if (result.isPresent() && !result.get().isEmpty()) {
+                        String petName = result.get();
+                        pet.setName(petName);
+                    }
+                });
+                // Check if user entered a name and set the pet's name
+                pet.birthday();
+                petEntity.getComponent(AnimationComponent.class).setAnim(pet);
+            }, Duration.seconds(10));
+        }
     }
     @Override
     protected  void initInput() {}
@@ -177,6 +231,15 @@ public class Main extends GameApplication {
                 pet.birthday();
                 petEntity.getComponent(AnimationComponent.class).setAnim(pet);
                 System.out.println(pet.getAge());
+            }
+        });
+
+        // save/creates saveFile.txt
+        button3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (pet.getStage() != LifeStage.EGG)
+                    save();
             }
         });
 
