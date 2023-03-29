@@ -135,16 +135,16 @@ public class Main extends GameApplication {
         bottomBar.setAlignment(Pos.CENTER);
 
         //TOP BUTTONS
-        Button button1 = createIconButton("fork.png", topBar);
-        Button button2 = createIconButton("eggHatch.png", topBar);
-        Button button3 = createIconButton("kipAngry_a.png", topBar);
-        Button button4 = createIconButton("kipAngry_b.png", topBar);
+        Button button1 = createIconButton("shopping-cart.png", topBar);
+        Button button2 = createIconButton("", topBar);
+        Button button3 = createIconButton("", topBar);
+        Button button4 = createIconButton("", topBar);
 
         //BOTTOM BUTTONS
-        Button button5 = createIconButton("fork.png", bottomBar);
-        Button button6 = createIconButton("eggHatch.png", bottomBar);
-        Button button7 = createIconButton("kipAngry_a.png", bottomBar);
-        Button button8 = createIconButton("kipAngry_b.png", bottomBar);
+        Button button5 = createIconButton("knife-and-fork.png", bottomBar);
+        Button button6 = createIconButton("games.png", bottomBar);
+        Button button7 = createIconButton("sleep.png", bottomBar);
+        Button button8 = createIconButton("graph.png", bottomBar);
 
         //popup
         Popup popup = new Popup();
