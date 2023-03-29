@@ -8,6 +8,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,10 +16,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import java.time.LocalTime;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
 
-import static com.almasb.fxgl.dsl.FXGL.getAssetLoader;
+import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Main extends GameApplication {
 
@@ -44,7 +49,6 @@ public class Main extends GameApplication {
                 .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 4)
                 .with(new AnimationComponent(pet))
                 .buildAndAttach();
-
     }
 
     @Override
@@ -126,10 +130,28 @@ public class Main extends GameApplication {
             iconView.setFitWidth(80);
             button.setGraphic(iconView);
             button.setPrefSize(80, 80);
+
+            //popup
+            Popup popup = new Popup();
+            Label popupLabel = new Label();
+            popupLabel.setText("Pet Stats:");
+            popupLabel.setMinWidth(300);
+            popupLabel.setMinHeight(380);
+//            FXGL.getPrimaryStage().setX(0);   //does weird shit
+//            FXGL.getPrimaryStage().setY(30);
+            popupLabel.setStyle("-fx-background-color:#FAF9F6; -fx-font-size:25");
+            popupLabel.setPadding(new Insets(20));
+            popup.getContent().add(popupLabel);
+
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    // TODO: stats popup window
+                    if(!popup.isShowing()){
+                        popup.show(FXGL.getPrimaryStage());
+                    }
+                    else{
+                        popup.hide();
+                    }
                 }
             });
             bottomBar.getChildren().add(button);
