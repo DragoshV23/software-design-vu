@@ -200,7 +200,7 @@ public class Main extends GameApplication {
         //TOP BUTTONS
         Button button1 = createIconButton("shopping-cart.png", topBar);
         Button button2 = createIconButton("", topBar);
-        Button button3 = createIconButton("", topBar);
+        Button button3 = createIconButton("resetClock.png", topBar);
         Button button4 = createIconButton("diskette.png", topBar);
 
         //BOTTOM BUTTONS
@@ -237,12 +237,18 @@ public class Main extends GameApplication {
         });
 
         //adds 1 age to pet
-        button3.setOnAction(new EventHandler<ActionEvent>() {
+        button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 pet.birthday();
                 petEntity.getComponent(AnimationComponent.class).setAnim(pet);
                 System.out.println(pet.getAge());
+            }
+        });
+        button3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                initUI();
             }
         });
         // save/creates saveFile.txt

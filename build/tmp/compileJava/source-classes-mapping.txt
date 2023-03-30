@@ -20,6 +20,13 @@ softwaredesign/RPS.java
  softwaredesign.Choice
  softwaredesign.Outcome
  softwaredesign.RPS
+softwaredesign/Pet.java
+ softwaredesign.Gender
+ softwaredesign.LifeStage
+ softwaredesign.Pet
+ softwaredesign.Race
+softwaredesign/AnimationComponent.java
+ softwaredesign.AnimationComponent
 softwaredesign/Main.java
  softwaredesign.Main
  softwaredesign.Main$1
@@ -27,10 +34,4 @@ softwaredesign/Main.java
  softwaredesign.Main$3
  softwaredesign.Main$4
  softwaredesign.Main$5
-softwaredesign/AnimationComponent.java
- softwaredesign.AnimationComponent
-softwaredesign/Pet.java
- softwaredesign.Gender
- softwaredesign.LifeStage
- softwaredesign.Pet
- softwaredesign.Race
+ softwaredesign.Main$6
