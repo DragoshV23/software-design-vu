@@ -332,7 +332,6 @@ public class Main extends GameApplication {
         });
     }
 
-
     //***************************** FOOD UI UTILS *****************************
     private VBox foodUI(HBox clockBar) {
         // Set up the top ui
@@ -368,6 +367,49 @@ public class Main extends GameApplication {
                 FXGL.getGameScene().addUINode(mainUI(clockBar));
             }
         });
+
+
+        // Add the bars to the UI
+        VBox ui = new VBox();
+        ui.getChildren().addAll(topUi, bottomBar);
+        ui.setAlignment(Pos.CENTER);
+        ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
+        return ui;
+    }
+
+    //***************************** RPS UI UTILS *****************************
+//    private void addChoiceButton(String imageName, Choice choice, Outcome outcome HBox clockBar, HBox topBar, HBox bottomBar) {
+//        Button button = createIconButton(imageName, bottomBar);
+//            button.setOnAction(event -> {
+//
+//            });
+//    }
+
+
+    //***************************** RPS UI UTILS *****************************
+    private VBox rpsUI(HBox clockBar) {
+        // Set up the top ui
+        VBox topUi = new VBox();
+        topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
+        topUi.setStyle("-fx-background-color: #1a1a1a;");
+        topUi.setAlignment(Pos.CENTER);
+        topUi.getChildren().add(clockBar);
+
+        // Set up the top bar
+        HBox topBar = new HBox();
+        topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
+        topBar.setStyle("-fx-background-color: #1a1a1a;");
+        topBar.setAlignment(Pos.CENTER);
+        topUi.getChildren().add(topBar);
+
+        // Set up the bottom bar
+        HBox bottomBar = new HBox();
+        bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
+        bottomBar.setStyle("-fx-background-color: #1a1a1a;");
+        bottomBar.setAlignment(Pos.CENTER);
+
+
+
 
 
         // Add the bars to the UI

@@ -75,13 +75,13 @@ public class Pet implements Serializable {
     }
     public void feed (Food foodItem) {
         if (this.hunger > 75 ) {
-            if (foodItem.name == "Burger" || foodItem.name == "Roasted Kip") {
+            if (foodItem.getName() == "Burger" || foodItem.getName() == "Roasted Kip") {
                 setHunger(100);
             } else {
-                setHunger(this.hunger + foodItem.nutritionVal);
+                setHunger(this.hunger + foodItem.getNutritionVal());
             }
         } else {
-            setHunger(this.hunger + foodItem.nutritionVal);
+            setHunger(this.hunger + foodItem.getNutritionVal());
         }
     }
 

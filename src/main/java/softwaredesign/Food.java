@@ -1,14 +1,14 @@
 package softwaredesign;
 
 public final class Food extends Item {
-    int nutritionVal;
+    private int nutritionVal;
 
     public int getNutritionVal() {return nutritionVal; }
 
     public Food(String name, int price, int nutritionVal) {
         this.nutritionVal = nutritionVal;
-        this.name = name;
-        this.price = price;
+        setName(name);
+        setPrice(price);
     }
 }
 
