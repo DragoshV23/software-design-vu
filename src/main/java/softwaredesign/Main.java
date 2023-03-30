@@ -15,6 +15,8 @@ import com.almasb.fxgl.ui.DialogBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -99,6 +101,7 @@ public class Main extends GameApplication {
     @Override
     protected void initGame() {
         loadOrCreatePet();
+        reducePetStats(Duration.seconds(6));
     }
     private void loadOrCreatePet() {
         File f = new File("saveFile.txt");
@@ -139,6 +142,16 @@ public class Main extends GameApplication {
                 petEntity.getComponent(AnimationComponent.class).setAnim(pet);
             }, Duration.seconds(10));
         }
+    }
+    private void reducePetStats(Duration interval) {
+        getGameTimer().runAtInterval(() -> {
+            if (pet.getStage() != LifeStage.EGG) {
+                pet.hungry();
+                pet.tired();
+                pet.bored();
+                pet.dirty();
+            }
+        }, interval);
     }
     @Override
     protected  void initInput() {}
