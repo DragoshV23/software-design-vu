@@ -32,3 +32,5 @@ softwaredesign/Main.java
  softwaredesign.Main$1
  softwaredesign.Main$2
  softwaredesign.Main$3
+ softwaredesign.Main$4
+ softwaredesign.Main$5
