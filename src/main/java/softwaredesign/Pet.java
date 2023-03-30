@@ -3,6 +3,7 @@ import java.util.Random;
 import java.io.Serializable;
 
 
+
 enum Race { ALL, KIP, GOAT, DINO, CAT }
 enum LifeStage { EGG, KID, ADULT }
 enum Gender {MALE, FEMALE}
@@ -68,9 +69,20 @@ public class Pet implements Serializable {
     public void improveMood() {
         if (this.mood > 75) {
             setMood(100);
+        } else {
+            setMood(this.mood + 25);
         }
-        setMood(this.mood + 25);
-
+    }
+    public void feed (Food foodItem) {
+        if (this.hunger > 75 ) {
+            if (foodItem.name == "Burger" || foodItem.name == "Roasted Kip") {
+                setHunger(100);
+            } else {
+                setHunger(this.hunger + foodItem.nutritionVal);
+            }
+        } else {
+            setHunger(this.hunger + foodItem.nutritionVal);
+        }
     }
 
     public void hungry() {
@@ -103,5 +115,6 @@ public class Pet implements Serializable {
     }
     public void setName(String name) { this.name = name; }
     public void setMood(int boost) { this.mood = boost; }
+    public void setHunger(int boost) { this.hunger = boost; }
 
 }

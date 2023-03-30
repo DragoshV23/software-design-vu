@@ -46,10 +46,21 @@ import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Main extends GameApplication {
-
+//    Text foodItemDescription = new Text(30.0, 75.0,
+//            "food.getName() + " +
+//                    "\"\\nPrice: $\" + " +
+//                    "food.getPrice() +  " +
+//                    "\"\\nNutritional value: \" + " +
+//                    "food.getNutritionVal();");
+//    //Loading a font from local file system
+//    Font font = Font.loadFont("file:resources/fonts/PressStart2P-Regular.ttf", 15);
+//    foodItemDescription.setFont(font);
+//    //Setting color of the text
+//      foodItemDescription.setFill(Color.BROWN);
     private static final int BUTTON_COUNT = 4;
     DataFile dataFile = new DataFile();
 
@@ -307,17 +318,21 @@ public class Main extends GameApplication {
     //***************************** FOOD UI UTILS *****************************
     void foodButtonHoverEffect(Button button, Food food, HBox topBar){
         button.setOnMouseEntered(event -> {
-            String foodLabel = "Price: $" + food.getPrice() + " Nutritional value: " + food.getNutritionVal();
+
+            String foodLabel = food.getName() + "\nPrice: $" + food.getPrice() +  "\nNutritional value: " + food.getNutritionVal();
             Label foodProperty = new Label(foodLabel);
+
             foodProperty.setTextFill(Color.WHITE);
-            foodProperty.setFont(Font.font("sans-serif", FontWeight.BOLD, 35));
+            foodProperty.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 20));
             topBar.getChildren().add(foodProperty);
         });
+
 
         button.setOnMouseExited(event -> {
             topBar.getChildren().clear();
         });
     }
+    //***************************** FOOD UI UTILS *****************************
     private VBox foodUI(HBox clockBar) {
         // Set up the top ui
         VBox topUi = new VBox();
@@ -339,16 +354,38 @@ public class Main extends GameApplication {
         bottomBar.setStyle("-fx-background-color: #1a1a1a;");
         bottomBar.setAlignment(Pos.CENTER);
 
-        //set the food items
+        // Set the burger item
         Button burgerButton = createIconButton("burger.png", bottomBar);
         foodButtonHoverEffect(burgerButton, burger, topBar);
+        burgerButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                pet.feed(burger);
+                FXGL.getGameScene().addUINode(mainUI(clockBar));
+            }
+        });
 
-        Button kipButton = createIconButton("banana.png", bottomBar);
+        // Set kip item
+        Button kipButton = createIconButton("roast-chicken.png", bottomBar);
         foodButtonHoverEffect(kipButton, kip, topBar);
+        kipButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                pet.feed(kip);
+                FXGL.getGameScene().addUINode(mainUI(clockBar));
+            }
+        });
 
-        Button bananaButton = createIconButton("roast-chicken.png", bottomBar);
+        // Set bananas item
+        Button bananaButton = createIconButton("banana.png", bottomBar);
         foodButtonHoverEffect(bananaButton, banana, topBar);
-
+        bananaButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                pet.feed(banana);
+                FXGL.getGameScene().addUINode(mainUI(clockBar));
+            }
+        });
 
         //go back button
         Button goBackButton = createIconButton("back.png", bottomBar);
