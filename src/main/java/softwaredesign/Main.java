@@ -90,6 +90,8 @@ public class Main extends GameApplication {
 
             Pet petLoad = (Pet) o.readObject();
             pet = petLoad;
+            f.close();
+            o.close();
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
@@ -462,7 +464,7 @@ public class Main extends GameApplication {
     }
 
     private VBox checkIfDead(HBox clockBar){
-//        if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
+        if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
             // Set up the top ui
             VBox topUi = new VBox();
             topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
@@ -492,7 +494,8 @@ public class Main extends GameApplication {
             ui.setAlignment(Pos.CENTER);
             ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
             return ui;
-//        }
+        }
+        return mainUI(clockBar);
     }
 
     private Button createIconButton(String imageName, HBox bar) {
