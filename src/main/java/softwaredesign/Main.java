@@ -31,15 +31,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import javafx.util.Duration;
-
 import java.io.*;
 import java.time.LocalTime;
 import java.util.Map;
 import java.util.Optional;
-
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
@@ -57,7 +57,6 @@ public class Main extends GameApplication {
         settings.setHeight(37 * 16);
         settings.setWidth(32 * 16);
     }
-
 
     Pet pet = new Pet();
     Entity petEntity;
@@ -143,6 +142,7 @@ public class Main extends GameApplication {
 
     @Override
     protected void initUI() {
+//        Font.loadFont(digital.ttf);
 
         // Set up the top ui
         VBox topUi = new VBox();
@@ -153,7 +153,7 @@ public class Main extends GameApplication {
         // Creating clock
         HBox clockBar = new HBox();
         clockBar.setPrefSize(FXGL.getAppWidth(), 8 * 16);
-        clockBar.setStyle("-fx-background-color: #00ff00;");
+        clockBar.setStyle("-fx-background-color: #000000; -fx-font-size: 60");
         clockBar.setAlignment(Pos.CENTER);
         topUi.getChildren().add(clockBar);
 
@@ -169,6 +169,9 @@ public class Main extends GameApplication {
                     time[0].getMinute(),
                     time[0].getSecond()
             ));
+//            Font font = Font.loadFont("resources/assets/fonts/clockfont.ttf", 60); //throwing a weird error
+//            timerLabel.setFont(font);
+            timerLabel.setStyle("-fx-text-fill: #8B4000");
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
