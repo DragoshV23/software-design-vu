@@ -67,6 +67,8 @@ public class Main extends GameApplication {
     //Create the pet
     Entity petEntity;
     Food burger = new Food("Burger", 10, 25);
+    Food kip = new Food("Roasted Kip", 20, 35);
+    Food banana = new Food("Bananas", 5, 10);
     private void save() {
         try {
             FileOutputStream f = new FileOutputStream(new File("saveFile.txt"));
@@ -310,6 +312,21 @@ public class Main extends GameApplication {
         return ui;
     }
 
+
+    //***************************** FOOD UI UTILS *****************************
+    void foodButtonHoverEffect(Button button, Food food, HBox topBar){
+        button.setOnMouseEntered(event -> {
+            String foodLabel = "Price: $" + food.getPrice() + " Nutritional value: " + food.getNutritionVal();
+            Label foodProperty = new Label(foodLabel);
+            foodProperty.setTextFill(Color.WHITE);
+            foodProperty.setFont(Font.font("sans-serif", FontWeight.BOLD, 35));
+            topBar.getChildren().add(foodProperty);
+        });
+
+        button.setOnMouseExited(event -> {
+            topBar.getChildren().clear();
+        });
+    }
     private VBox foodUI(HBox clockBar) {
         // Set up the top ui
         VBox topUi = new VBox();
@@ -333,27 +350,14 @@ public class Main extends GameApplication {
 
         //set the food items
         Button burgerButton = createIconButton("burger.png", bottomBar);
+        foodButtonHoverEffect(burgerButton, burger, topBar);
+
         Button kipButton = createIconButton("banana.png", bottomBar);
+        foodButtonHoverEffect(kipButton, kip, topBar);
+
         Button bananaButton = createIconButton("roast-chicken.png", bottomBar);
+        foodButtonHoverEffect(bananaButton, banana, topBar);
 
-        burgerButton.setOnMouseEntered(event -> {
-            String burgerLabel = "Price: $" + burger.getPrice() +  " Nutritional value: " + burger.getNutritionVal();
-            Label foodProperty = new Label(burgerLabel);
-            foodProperty.setTextFill(Color.WHITE);
-            foodProperty.setFont(Font.font("Arial", FontWeight.BOLD, 26));
-            topBar.getChildren().add(foodProperty);
-        });
-        burgerButton.setOnMouseExited(event -> {
-            topBar.getChildren().clear();
-        });
-
-//        burgerButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-//                new EventHandler<MouseEvent>() {
-//                    @Override
-//                    public void handle(MouseEvent e) {
-//
-//                    }
-//                });
 
         //go back button
         Button goBackButton = createIconButton("back.png", bottomBar);
