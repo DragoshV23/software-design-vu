@@ -201,7 +201,7 @@ public class Main extends GameApplication {
         Button button1 = createIconButton("shopping-cart.png", topBar);
         Button button2 = createIconButton("", topBar);
         Button button3 = createIconButton("", topBar);
-        Button button4 = createIconButton("", topBar);
+        Button button4 = createIconButton("diskette.png", topBar);
 
         //BOTTOM BUTTONS
         Button button5 = createIconButton("knife-and-fork.png", bottomBar);
