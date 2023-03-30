@@ -62,6 +62,8 @@ public class Main extends GameApplication {
 
     Pet pet = new Pet();
     Entity petEntity;
+
+
     private void save() {
         try {
             FileOutputStream f = new FileOutputStream(new File("saveFile.txt"));
@@ -77,7 +79,6 @@ public class Main extends GameApplication {
     }
     private void load() {
         try {
-
             FileInputStream f = new FileInputStream(new File("saveFile.txt"));
             ObjectInputStream o = new ObjectInputStream(f);
 
@@ -259,15 +260,6 @@ public class Main extends GameApplication {
             }
         });
 
-        //adds 1 age to pet
-        button2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                pet.birthday();
-                petEntity.getComponent(AnimationComponent.class).setAnim(pet);
-                System.out.println(pet.getAge());
-            }
-        });
         button3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -360,6 +352,10 @@ public class Main extends GameApplication {
             bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
             bottomBar.setStyle("-fx-background-color: #1a1a1a;");
             bottomBar.setAlignment(Pos.CENTER);
+
+            File f = new File("saveFile.txt");
+
+            f.delete();
 
             VBox ui = new VBox();
             ui.getChildren().addAll(topUi, bottomBar);

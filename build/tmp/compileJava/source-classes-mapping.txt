@@ -1,25 +1,32 @@
-softwaredesign/Shop.java
- softwaredesign.Shop
+softwaredesign/AnimationGroup.java
+ softwaredesign.AnimationGroup
+ softwaredesign.AnimationGroup$1
 softwaredesign/Item.java
  softwaredesign.Item
-softwaredesign/Food.java
- softwaredesign.Food
-softwaredesign/Background.java
- softwaredesign.Background
-softwaredesign/User.java
- softwaredesign.User
-softwaredesign/MiniGame.java
- softwaredesign.MiniGame
+softwaredesign/Animation.java
+ softwaredesign.Animation
+ softwaredesign.State
 softwaredesign/RPS.java
  softwaredesign.Choice
  softwaredesign.Outcome
  softwaredesign.RPS
-softwaredesign/AnimationGroup.java
- softwaredesign.AnimationGroup
- softwaredesign.AnimationGroup$1
-softwaredesign/Animation.java
- softwaredesign.Animation
- softwaredesign.State
+softwaredesign/User.java
+ softwaredesign.User
+softwaredesign/Shop.java
+ softwaredesign.Shop
+softwaredesign/AnimationComponent.java
+ softwaredesign.AnimationComponent
+softwaredesign/Food.java
+ softwaredesign.Food
+softwaredesign/MiniGame.java
+ softwaredesign.MiniGame
+softwaredesign/Background.java
+ softwaredesign.Background
+softwaredesign/Pet.java
+ softwaredesign.Gender
+ softwaredesign.LifeStage
+ softwaredesign.Pet
+ softwaredesign.Race
 softwaredesign/Main.java
  softwaredesign.Main
  softwaredesign.Main$1
@@ -28,13 +35,3 @@ softwaredesign/Main.java
  softwaredesign.Main$4
  softwaredesign.Main$5
  softwaredesign.Main$6
-<<<<<<< HEAD
-=======
-softwaredesign/AnimationComponent.java
- softwaredesign.AnimationComponent
-softwaredesign/Pet.java
- softwaredesign.Gender
- softwaredesign.LifeStage
- softwaredesign.Pet
- softwaredesign.Race
->>>>>>> 34583311e0761c61437ab1274d30aa84ad48a3d6
