@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -66,6 +67,8 @@ public class Main extends GameApplication {
     Pet pet = new Pet();
     //Create the pet
     Entity petEntity;
+    // create user
+    User user = new User();
     // create food
     Food burger = new Food("Burger", 10, 25);
     Food kip = new Food("Roasted Kip", 20, 35);
@@ -314,8 +317,9 @@ public class Main extends GameApplication {
 
     //***************************** FOOD UI UTILS *****************************
     void foodButtonHoverEffect(Button button, Food food, HBox topBar){
+        Node balanceDisplay = topBar.getChildren().get(0);
         button.setOnMouseEntered(event -> {
-
+            topBar.getChildren().clear();
             String foodLabel = food.getName() + "\nPrice: $" + food.getPrice() +  "\nNutritional value: " + food.getNutritionVal();
             Label foodProperty = new Label(foodLabel);
 
@@ -327,6 +331,7 @@ public class Main extends GameApplication {
 
         button.setOnMouseExited(event -> {
             topBar.getChildren().clear();
+            topBar.getChildren().add(balanceDisplay);
         });
     }
 
@@ -348,6 +353,8 @@ public class Main extends GameApplication {
         topUi.setAlignment(Pos.CENTER);
         topUi.getChildren().add(clockBar);
 
+
+
         // Set up the top bar
         HBox topBar = new HBox();
         topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
@@ -355,12 +362,19 @@ public class Main extends GameApplication {
         topBar.setAlignment(Pos.CENTER);
         topUi.getChildren().add(topBar);
 
+        // Add user balance
+        String balanceString = "Balance: $" + user.getBalance();
+        Label balanceLabel = new Label(balanceString);
+
+        balanceLabel.setTextFill(Color.WHITE);
+        balanceLabel.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 20));
+        topBar.getChildren().add(balanceLabel);
+
         // Set up the bottom bar
         HBox bottomBar = new HBox();
         bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
         bottomBar.setStyle("-fx-background-color: #1a1a1a;");
         bottomBar.setAlignment(Pos.CENTER);
-
 
         addFoodButton("burger.png", burger, clockBar, topBar, bottomBar);
         addFoodButton("roast-chicken.png", kip, clockBar, topBar, bottomBar);
@@ -374,7 +388,6 @@ public class Main extends GameApplication {
                 FXGL.getGameScene().addUINode(mainUI(clockBar));
             }
         });
-
 
         // Add the bars to the UI
         VBox ui = new VBox();
@@ -414,10 +427,6 @@ public class Main extends GameApplication {
         bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
         bottomBar.setStyle("-fx-background-color: #1a1a1a;");
         bottomBar.setAlignment(Pos.CENTER);
-
-
-
-
 
         // Add the bars to the UI
         VBox ui = new VBox();
@@ -469,7 +478,7 @@ public class Main extends GameApplication {
         return ui;
     }
 
-    private VBox checkIfDead(HBox clockBar){
+    private VBox checkIfDead(HBox clockBar){ // TODO: separate to different functions
         if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
             // Set up the top ui
             VBox topUi = new VBox();

@@ -1,7 +1,10 @@
 package softwaredesign;
 
 public class User {
-    int balance;
+    private int balance;
+    public User() {
+        this.balance = 0;
+    }
 
     public void setBalance(int balance){
         this.balance = balance;
