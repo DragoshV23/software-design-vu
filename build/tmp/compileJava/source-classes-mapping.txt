@@ -12,8 +12,11 @@ softwaredesign/RPS.java
  softwaredesign.RPS
 softwaredesign/User.java
  softwaredesign.User
-softwaredesign/Shop.java
- softwaredesign.Shop
+softwaredesign/Main.java
+ softwaredesign.Main
+ softwaredesign.Main$1
+ softwaredesign.Main$2
+ softwaredesign.Main$3
 softwaredesign/AnimationComponent.java
  softwaredesign.AnimationComponent
 softwaredesign/Food.java
@@ -27,8 +30,5 @@ softwaredesign/Pet.java
  softwaredesign.LifeStage
  softwaredesign.Pet
  softwaredesign.Race
-softwaredesign/Main.java
- softwaredesign.Main
- softwaredesign.Main$1
- softwaredesign.Main$2
- softwaredesign.Main$3
+softwaredesign/Shop.java
+ softwaredesign.Shop
