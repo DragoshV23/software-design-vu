@@ -230,6 +230,13 @@ public class Main extends GameApplication {
             }
         });
 
+        button2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                FXGL.getGameScene().addUINode(checkIfDead(clockBar));
+            }
+        });
+
         //adds 1 age to pet
         button3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -247,8 +254,6 @@ public class Main extends GameApplication {
                     save();
             }
         });
-
-
 
         // Add the bars to the UI
         VBox ui = new VBox();
@@ -306,6 +311,36 @@ public class Main extends GameApplication {
         ui.setAlignment(Pos.CENTER);
         ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
         return ui;
+    }
+
+    private VBox checkIfDead(HBox clockBar){
+//        if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
+            // Set up the top ui
+            VBox topUi = new VBox();
+            topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
+            topUi.setStyle("-fx-background-color: #1a1a1a;");
+            topUi.setAlignment(Pos.CENTER);
+            topUi.getChildren().add(clockBar);
+
+            // Set up the top bar
+            HBox topBar = new HBox();
+            topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
+            topBar.setStyle("-fx-background-color: #1a1a1a;");
+            topBar.setAlignment(Pos.CENTER);
+            topUi.getChildren().add(topBar);
+
+            // Set up the bottom bar
+            HBox bottomBar = new HBox();
+            bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
+            bottomBar.setStyle("-fx-background-color: #1a1a1a;");
+            bottomBar.setAlignment(Pos.CENTER);
+
+            VBox ui = new VBox();
+            ui.getChildren().addAll(topUi, bottomBar);
+            ui.setAlignment(Pos.CENTER);
+            ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
+            return ui;
+//        }
     }
 
     private Button createIconButton(String imageName, HBox bar) {
