@@ -10,23 +10,45 @@ softwaredesign/RPS.java
  softwaredesign.Choice
  softwaredesign.Outcome
  softwaredesign.RPS
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7d5d429247b4279390e0cc9f404bba83c3d9e8a8
 softwaredesign/User.java
  softwaredesign.User
 softwaredesign/Shop.java
  softwaredesign.Shop
 softwaredesign/AnimationComponent.java
  softwaredesign.AnimationComponent
+<<<<<<< HEAD
 softwaredesign/Food.java
  softwaredesign.Food
 softwaredesign/MiniGame.java
  softwaredesign.MiniGame
 softwaredesign/Background.java
  softwaredesign.Background
+=======
+>>>>>>> 7d5d429247b4279390e0cc9f404bba83c3d9e8a8
 softwaredesign/Pet.java
  softwaredesign.Gender
  softwaredesign.LifeStage
  softwaredesign.Pet
  softwaredesign.Race
+<<<<<<< HEAD
+=======
+softwaredesign/Background.java
+ softwaredesign.Background
+softwaredesign/MiniGame.java
+ softwaredesign.MiniGame
+=======
+softwaredesign/AnimationGroup.java
+ softwaredesign.AnimationGroup
+ softwaredesign.AnimationGroup$1
+softwaredesign/Animation.java
+ softwaredesign.Animation
+ softwaredesign.State
+>>>>>>> b091e512ecd21dc7174024bc3118a30bd16cc7f7
+>>>>>>> 7d5d429247b4279390e0cc9f404bba83c3d9e8a8
 softwaredesign/Main.java
  softwaredesign.Main
  softwaredesign.Main$1
@@ -35,3 +57,22 @@ softwaredesign/Main.java
  softwaredesign.Main$4
  softwaredesign.Main$5
  softwaredesign.Main$6
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+ softwaredesign.Main$7
+softwaredesign/Food.java
+ softwaredesign.Food
+=======
+<<<<<<< HEAD
+=======
+softwaredesign/AnimationComponent.java
+ softwaredesign.AnimationComponent
+softwaredesign/Pet.java
+ softwaredesign.Gender
+ softwaredesign.LifeStage
+ softwaredesign.Pet
+ softwaredesign.Race
+>>>>>>> 34583311e0761c61437ab1274d30aa84ad48a3d6
+>>>>>>> b091e512ecd21dc7174024bc3118a30bd16cc7f7
+>>>>>>> 7d5d429247b4279390e0cc9f404bba83c3d9e8a8
