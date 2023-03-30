@@ -73,6 +73,19 @@ public class Pet implements Serializable {
 
     }
 
+    public void hungry() {
+        this.hunger = this.hunger - 10;
+    }
+    public void tired() {
+        this.energy = this.energy - 10;
+    }
+    public void bored() {
+        this.mood = this.mood - 10;
+    }
+    public void dirty() {
+        this.health = this.health - 10;
+    }
+
     public Race getRace() {return race; }
     public int getAge() {return age; }
     public State getState() {return state; }

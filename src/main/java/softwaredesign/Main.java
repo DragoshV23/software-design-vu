@@ -15,6 +15,8 @@ import com.almasb.fxgl.ui.DialogBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -103,6 +105,10 @@ public class Main extends GameApplication {
 
     @Override
     protected void initGame() {
+        loadOrCreatePet();
+        reducePetStats(Duration.seconds(6));
+    }
+    private void loadOrCreatePet() {
         File f = new File("saveFile.txt");
         if(f.exists() && !f.isDirectory()) {
             load();
@@ -141,6 +147,16 @@ public class Main extends GameApplication {
                 petEntity.getComponent(AnimationComponent.class).setAnim(pet);
             }, Duration.seconds(10));
         }
+    }
+    private void reducePetStats(Duration interval) {
+        getGameTimer().runAtInterval(() -> {
+            if (pet.getStage() != LifeStage.EGG) {
+                pet.hungry();
+                pet.tired();
+                pet.bored();
+                pet.dirty();
+            }
+        }, interval);
     }
     @Override
     protected  void initInput() {}
@@ -205,8 +221,8 @@ public class Main extends GameApplication {
         //TOP BUTTONS
         Button button1 = createIconButton("shopping-cart.png", topBar);
         Button button2 = createIconButton("", topBar);
-        Button button3 = createIconButton("", topBar);
-        Button button4 = createIconButton("", topBar);
+        Button button3 = createIconButton("resetClock.png", topBar);
+        Button button4 = createIconButton("diskette.png", topBar);
 
         //BOTTOM BUTTONS
         Button button5 = createIconButton("knife-and-fork.png", bottomBar);
@@ -241,13 +257,26 @@ public class Main extends GameApplication {
             }
         });
 
+        button2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                FXGL.getGameScene().addUINode(checkIfDead(clockBar));
+            }
+        });
+
         //adds 1 age to pet
-        button3.setOnAction(new EventHandler<ActionEvent>() {
+        button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 pet.birthday();
                 petEntity.getComponent(AnimationComponent.class).setAnim(pet);
                 System.out.println(pet.getAge());
+            }
+        });
+        button3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                initUI();
             }
         });
         // save/creates saveFile.txt
@@ -258,8 +287,6 @@ public class Main extends GameApplication {
                     save();
             }
         });
-
-
 
         // Add the bars to the UI
         VBox ui = new VBox();
@@ -385,6 +412,36 @@ public class Main extends GameApplication {
         ui.setAlignment(Pos.CENTER);
         ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
         return ui;
+    }
+
+    private VBox checkIfDead(HBox clockBar){
+//        if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
+            // Set up the top ui
+            VBox topUi = new VBox();
+            topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
+            topUi.setStyle("-fx-background-color: #1a1a1a;");
+            topUi.setAlignment(Pos.CENTER);
+            topUi.getChildren().add(clockBar);
+
+            // Set up the top bar
+            HBox topBar = new HBox();
+            topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
+            topBar.setStyle("-fx-background-color: #1a1a1a;");
+            topBar.setAlignment(Pos.CENTER);
+            topUi.getChildren().add(topBar);
+
+            // Set up the bottom bar
+            HBox bottomBar = new HBox();
+            bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
+            bottomBar.setStyle("-fx-background-color: #1a1a1a;");
+            bottomBar.setAlignment(Pos.CENTER);
+
+            VBox ui = new VBox();
+            ui.getChildren().addAll(topUi, bottomBar);
+            ui.setAlignment(Pos.CENTER);
+            ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
+            return ui;
+//        }
     }
 
     private Button createIconButton(String imageName, HBox bar) {
