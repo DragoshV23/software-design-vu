@@ -50,17 +50,6 @@ import javafx.scene.text.Text;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Main extends GameApplication {
-//    Text foodItemDescription = new Text(30.0, 75.0,
-//            "food.getName() + " +
-//                    "\"\\nPrice: $\" + " +
-//                    "food.getPrice() +  " +
-//                    "\"\\nNutritional value: \" + " +
-//                    "food.getNutritionVal();");
-//    //Loading a font from local file system
-//    Font font = Font.loadFont("file:resources/fonts/PressStart2P-Regular.ttf", 15);
-//    foodItemDescription.setFont(font);
-//    //Setting color of the text
-//      foodItemDescription.setFill(Color.BROWN);
     private static final int BUTTON_COUNT = 4;
     DataFile dataFile = new DataFile();
 
@@ -332,6 +321,17 @@ public class Main extends GameApplication {
             topBar.getChildren().clear();
         });
     }
+
+    private void addFoodButton(String imageName, Food food, HBox clockBar, HBox topBar, HBox bottomBar) {
+        Button button = createIconButton(imageName, bottomBar);
+        foodButtonHoverEffect(button, food, topBar);
+        button.setOnAction(event -> {
+            pet.feed(food);
+            FXGL.getGameScene().addUINode(mainUI(clockBar));
+        });
+    }
+
+
     //***************************** FOOD UI UTILS *****************************
     private VBox foodUI(HBox clockBar) {
         // Set up the top ui
@@ -354,39 +354,11 @@ public class Main extends GameApplication {
         bottomBar.setStyle("-fx-background-color: #1a1a1a;");
         bottomBar.setAlignment(Pos.CENTER);
 
-        // Set the burger item
-        Button burgerButton = createIconButton("burger.png", bottomBar);
-        foodButtonHoverEffect(burgerButton, burger, topBar);
-        burgerButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                pet.feed(burger);
-                FXGL.getGameScene().addUINode(mainUI(clockBar));
-            }
-        });
 
-        // Set kip item
-        Button kipButton = createIconButton("roast-chicken.png", bottomBar);
-        foodButtonHoverEffect(kipButton, kip, topBar);
-        kipButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                pet.feed(kip);
-                FXGL.getGameScene().addUINode(mainUI(clockBar));
-            }
-        });
-
-        // Set bananas item
-        Button bananaButton = createIconButton("banana.png", bottomBar);
-        foodButtonHoverEffect(bananaButton, banana, topBar);
-        bananaButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                pet.feed(banana);
-                FXGL.getGameScene().addUINode(mainUI(clockBar));
-            }
-        });
-
+        addFoodButton("burger.png", burger, clockBar, topBar, bottomBar);
+        addFoodButton("roast-chicken.png", kip, clockBar, topBar, bottomBar);
+        addFoodButton("banana.png", banana, clockBar, topBar, bottomBar);
+        
         //go back button
         Button goBackButton = createIconButton("back.png", bottomBar);
         goBackButton.setOnAction(new EventHandler<ActionEvent>() {
