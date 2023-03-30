@@ -18,10 +18,10 @@ softwaredesign/AnimationComponent.java
  softwaredesign.AnimationComponent
 softwaredesign/Food.java
  softwaredesign.Food
-softwaredesign/MiniGame.java
- softwaredesign.MiniGame
 softwaredesign/Background.java
  softwaredesign.Background
+softwaredesign/MiniGame.java
+ softwaredesign.MiniGame
 softwaredesign/Pet.java
  softwaredesign.Gender
  softwaredesign.LifeStage

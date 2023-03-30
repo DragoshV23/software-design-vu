@@ -228,7 +228,7 @@ public class Main extends GameApplication {
         });
 
         //adds 1 age to pet
-        button4.setOnAction(new EventHandler<ActionEvent>() {
+        button3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 pet.birthday();
@@ -236,9 +236,8 @@ public class Main extends GameApplication {
                 System.out.println(pet.getAge());
             }
         });
-
         // save/creates saveFile.txt
-        button3.setOnAction(new EventHandler<ActionEvent>() {
+        button4.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if (pet.getStage() != LifeStage.EGG)
