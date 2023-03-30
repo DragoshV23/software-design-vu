@@ -31,15 +31,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import javafx.util.Duration;
-
 import java.io.*;
 import java.time.LocalTime;
 import java.util.Map;
 import java.util.Optional;
-
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
@@ -57,7 +57,6 @@ public class Main extends GameApplication {
         settings.setHeight(37 * 16);
         settings.setWidth(32 * 16);
     }
-
 
     Pet pet = new Pet();
     Entity petEntity;
@@ -143,6 +142,7 @@ public class Main extends GameApplication {
 
     @Override
     protected void initUI() {
+//        Font.loadFont(digital.ttf);
 
         // Set up the top ui
         VBox topUi = new VBox();
@@ -153,7 +153,7 @@ public class Main extends GameApplication {
         // Creating clock
         HBox clockBar = new HBox();
         clockBar.setPrefSize(FXGL.getAppWidth(), 8 * 16);
-        clockBar.setStyle("-fx-background-color: #00ff00;");
+        clockBar.setStyle("-fx-background-color: #000000; -fx-font-size: 60");
         clockBar.setAlignment(Pos.CENTER);
         topUi.getChildren().add(clockBar);
 
@@ -169,6 +169,9 @@ public class Main extends GameApplication {
                     time[0].getMinute(),
                     time[0].getSecond()
             ));
+//            Font font = Font.loadFont("resources/assets/fonts/clockfont.ttf", 60); //throwing a weird error
+//            timerLabel.setFont(font);
+            timerLabel.setStyle("-fx-text-fill: #8B4000");
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
@@ -245,6 +248,8 @@ public class Main extends GameApplication {
             }
         });
 
+
+
         // Add the bars to the UI
         VBox ui = new VBox();
         ui.getChildren().addAll(topUi, bottomBar);
@@ -253,6 +258,54 @@ public class Main extends GameApplication {
 
         // Add the UI to the game scene
         FXGL.getGameScene().addUINode(ui);
+
+        button7.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FXGL.getGameScene().addUINode(sleepUI(clockBar, button8));
+            }
+        });
+    }
+
+    private VBox sleepUI(HBox clockBar, Button statsButton) {
+        // Set up the top ui
+        VBox topUi = new VBox();
+        topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
+        topUi.setStyle("-fx-background-color: #1a1a1a;");
+        topUi.setAlignment(Pos.CENTER);
+        topUi.getChildren().add(clockBar);
+
+        // Set up the top bar
+        HBox topBar = new HBox();
+        topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
+        topBar.setStyle("-fx-background-color: #1a1a1a;");
+        topBar.setAlignment(Pos.CENTER);
+        topUi.getChildren().add(topBar);
+
+        // Set up the bottom bar
+        HBox bottomBar = new HBox();
+        bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
+        bottomBar.setStyle("-fx-background-color: #1a1a1a;");
+        bottomBar.setAlignment(Pos.CENTER);
+
+        // wake up Button
+        Button wakeButton = createIconButton("wake-up.png", bottomBar);
+        wakeButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                // TODO: Wake up pet
+                initUI();
+            }
+        });
+
+        bottomBar.getChildren().add(statsButton);
+
+        // Add the bars to the UI
+        VBox ui = new VBox();
+        ui.getChildren().addAll(topUi, bottomBar);
+        ui.setAlignment(Pos.CENTER);
+        ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
+        return ui;
     }
 
     private Button createIconButton(String imageName, HBox bar) {
