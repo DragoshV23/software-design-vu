@@ -1,10 +1,13 @@
 package softwaredesign;
 
 public abstract class Item {
-    String name;
-    int price;
 
-    public String getName() {return name; }
+    private String name;
 
-    public int getPrice() {return price; }
+    private int price;
+
+    public void setName(String name) { this.name = name; }
+    public String getName() { return name; }
+    public void setPrice(int price) { this.price = price; }
+    public int getPrice() { return price; }
 }
