@@ -65,6 +65,28 @@ public class Pet implements Serializable {
         setAge(this.age + 1);
         setStage(calcLifeStage(this.age));
     }
+    public void sleep() {
+        this.state = State.SLEEP;
+        if (energy < 95) {
+            this.energy += 5;
+        } else {
+            this.energy = 100;
+        }
+
+    }
+
+    public void wake() {
+        this.state = State.IDLE; // TODO: check if every stat above 50 else angry
+        hungry();
+        hungry();
+        dirty();
+        if (mood < 95) {
+            this.mood += 5;
+        } else {
+            this.mood = 100;
+        }
+
+    }
 
     public void improveMood() {
         if (this.mood > 75) {

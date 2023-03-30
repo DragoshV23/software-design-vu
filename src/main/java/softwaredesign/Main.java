@@ -66,7 +66,7 @@ public class Main extends GameApplication {
     Pet pet = new Pet();
     //Create the pet
     Entity petEntity;
-
+    // create food
     Food burger = new Food("Burger", 10, 25);
     Food kip = new Food("Roasted Kip", 20, 35);
     Food banana = new Food("Bananas", 5, 10);
@@ -300,6 +300,11 @@ public class Main extends GameApplication {
         button7.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                pet.sleep();
+                petEntity.getComponent(AnimationComponent.class).setAnim(pet);
+                getGameTimer().runAtInterval(() -> {
+                    pet.sleep();
+                }, Duration.seconds(10));
                 FXGL.getGameScene().addUINode(sleepUI(clockBar, button8));
             }
         });
@@ -448,7 +453,8 @@ public class Main extends GameApplication {
         wakeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // TODO: Wake up pet
+                pet.wake();
+                petEntity.getComponent(AnimationComponent.class).setAnim(pet);
                 FXGL.getGameScene().addUINode(mainUI(clockBar));
             }
         });
