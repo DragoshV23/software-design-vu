@@ -15,6 +15,8 @@ import com.almasb.fxgl.ui.DialogBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -98,6 +100,10 @@ public class Main extends GameApplication {
 
     @Override
     protected void initGame() {
+        loadOrCreatePet();
+        reducePetStats(Duration.seconds(6));
+    }
+    private void loadOrCreatePet() {
         File f = new File("saveFile.txt");
         if(f.exists() && !f.isDirectory()) {
             load();
@@ -137,6 +143,16 @@ public class Main extends GameApplication {
             }, Duration.seconds(10));
         }
     }
+    private void reducePetStats(Duration interval) {
+        getGameTimer().runAtInterval(() -> {
+            if (pet.getStage() != LifeStage.EGG) {
+                pet.hungry();
+                pet.tired();
+                pet.bored();
+                pet.dirty();
+            }
+        }, interval);
+    }
     @Override
     protected  void initInput() {}
 
@@ -144,18 +160,12 @@ public class Main extends GameApplication {
     protected void initUI() {
 //        Font.loadFont(digital.ttf);
 
-        // Set up the top ui
-        VBox topUi = new VBox();
-        topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
-        topUi.setStyle("-fx-background-color: #1a1a1a;");
-        topUi.setAlignment(Pos.CENTER);
-
         // Creating clock
         HBox clockBar = new HBox();
         clockBar.setPrefSize(FXGL.getAppWidth(), 8 * 16);
         clockBar.setStyle("-fx-background-color: #000000; -fx-font-size: 60");
         clockBar.setAlignment(Pos.CENTER);
-        topUi.getChildren().add(clockBar);
+
 
         Label timerLabel = new Label("00:00:00");
 
@@ -178,6 +188,18 @@ public class Main extends GameApplication {
 
         clockBar.getChildren().add(timerLabel);
 
+        // Add the UI to the game scene
+        FXGL.getGameScene().addUINode(mainUI(clockBar));
+    }
+
+    private VBox mainUI(HBox clockBar) {
+        // Set up the top ui
+        VBox topUi = new VBox();
+        topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
+        topUi.setStyle("-fx-background-color: #1a1a1a;");
+        topUi.setAlignment(Pos.CENTER);
+        topUi.getChildren().add(clockBar);
+
         // Set up the top bar
         HBox topBar = new HBox();
         topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
@@ -194,8 +216,8 @@ public class Main extends GameApplication {
         //TOP BUTTONS
         Button button1 = createIconButton("shopping-cart.png", topBar);
         Button button2 = createIconButton("", topBar);
-        Button button3 = createIconButton("", topBar);
-        Button button4 = createIconButton("", topBar);
+        Button button3 = createIconButton("resetClock.png", topBar);
+        Button button4 = createIconButton("diskette.png", topBar);
 
         //BOTTOM BUTTONS
         Button button5 = createIconButton("knife-and-fork.png", bottomBar);
@@ -238,12 +260,18 @@ public class Main extends GameApplication {
         });
 
         //adds 1 age to pet
-        button3.setOnAction(new EventHandler<ActionEvent>() {
+        button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 pet.birthday();
                 petEntity.getComponent(AnimationComponent.class).setAnim(pet);
                 System.out.println(pet.getAge());
+            }
+        });
+        button3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                initUI();
             }
         });
         // save/creates saveFile.txt
@@ -261,15 +289,13 @@ public class Main extends GameApplication {
         ui.setAlignment(Pos.CENTER);
         ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
 
-        // Add the UI to the game scene
-        FXGL.getGameScene().addUINode(ui);
-
         button7.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 FXGL.getGameScene().addUINode(sleepUI(clockBar, button8));
             }
         });
+        return ui;
     }
 
     private VBox sleepUI(HBox clockBar, Button statsButton) {
@@ -299,7 +325,7 @@ public class Main extends GameApplication {
             @Override
             public void handle(ActionEvent event) {
                 // TODO: Wake up pet
-                initUI();
+                FXGL.getGameScene().addUINode(mainUI(clockBar));
             }
         });
 
