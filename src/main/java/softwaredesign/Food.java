@@ -11,3 +11,4 @@ public final class Food extends Item{
         this.price = price;
     }
 }
+
