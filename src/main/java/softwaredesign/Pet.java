@@ -65,6 +65,14 @@ public class Pet implements Serializable {
         setStage(calcLifeStage(this.age));
     }
 
+    public void improveMood() {
+        if (this.mood > 75) {
+            setMood(100);
+        }
+        setMood(this.mood + 25);
+
+    }
+
     public Race getRace() {return race; }
     public int getAge() {return age; }
     public State getState() {return state; }
@@ -81,7 +89,6 @@ public class Pet implements Serializable {
         this.age = age;
     }
     public void setName(String name) { this.name = name; }
-
-
+    public void setMood(int boost) { this.mood += boost; }
 
 }
