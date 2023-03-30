@@ -203,11 +203,6 @@ public class Main extends GameApplication {
         //popup
         Popup popup = new Popup();
         Label popupLabel = new Label();
-        popupLabel.setText("Pet stats: " +
-                "\nMood: " + pet.getMood() +
-                "\nHealth: " + pet.getHealth() +
-                "\nHunger: " + pet.getHunger() +
-                "\nEnergy: " + pet.getEnergy());
 
         popupLabel.setMinWidth(300);
         popupLabel.setMinHeight(380);
@@ -219,6 +214,11 @@ public class Main extends GameApplication {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(!popup.isShowing()){
+                    popupLabel.setText(pet.getName() + " stats " +
+                            "\nMood: " + pet.getMood() +
+                            "\nHealth: " + pet.getHealth() +
+                            "\nHunger: " + pet.getHunger() +
+                            "\nEnergy: " + pet.getEnergy());
                     popup.show(FXGL.getPrimaryStage());
                 }
                 else{
