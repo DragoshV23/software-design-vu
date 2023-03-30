@@ -144,18 +144,12 @@ public class Main extends GameApplication {
     protected void initUI() {
 //        Font.loadFont(digital.ttf);
 
-        // Set up the top ui
-        VBox topUi = new VBox();
-        topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
-        topUi.setStyle("-fx-background-color: #1a1a1a;");
-        topUi.setAlignment(Pos.CENTER);
-
         // Creating clock
         HBox clockBar = new HBox();
         clockBar.setPrefSize(FXGL.getAppWidth(), 8 * 16);
         clockBar.setStyle("-fx-background-color: #000000; -fx-font-size: 60");
         clockBar.setAlignment(Pos.CENTER);
-        topUi.getChildren().add(clockBar);
+
 
         Label timerLabel = new Label("00:00:00");
 
@@ -177,6 +171,18 @@ public class Main extends GameApplication {
         timeline.play();
 
         clockBar.getChildren().add(timerLabel);
+
+        // Add the UI to the game scene
+        FXGL.getGameScene().addUINode(mainUI(clockBar));
+    }
+
+    private VBox mainUI(HBox clockBar) {
+        // Set up the top ui
+        VBox topUi = new VBox();
+        topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
+        topUi.setStyle("-fx-background-color: #1a1a1a;");
+        topUi.setAlignment(Pos.CENTER);
+        topUi.getChildren().add(clockBar);
 
         // Set up the top bar
         HBox topBar = new HBox();
@@ -256,15 +262,13 @@ public class Main extends GameApplication {
         ui.setAlignment(Pos.CENTER);
         ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
 
-        // Add the UI to the game scene
-        FXGL.getGameScene().addUINode(ui);
-
         button7.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 FXGL.getGameScene().addUINode(sleepUI(clockBar, button8));
             }
         });
+        return ui;
     }
 
     private VBox sleepUI(HBox clockBar, Button statsButton) {
@@ -294,7 +298,7 @@ public class Main extends GameApplication {
             @Override
             public void handle(ActionEvent event) {
                 // TODO: Wake up pet
-                initUI();
+                FXGL.getGameScene().addUINode(mainUI(clockBar));
             }
         });
 
