@@ -98,6 +98,9 @@ public class Main extends GameApplication {
 
     @Override
     protected void initGame() {
+        loadOrCreatePet();
+    }
+    private void loadOrCreatePet() {
         File f = new File("saveFile.txt");
         if(f.exists() && !f.isDirectory()) {
             load();
