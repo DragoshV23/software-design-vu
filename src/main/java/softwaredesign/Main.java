@@ -177,6 +177,7 @@ public class Main extends GameApplication {
         Label timerLabel = new Label("00:00:00");
 
         timerLabel.setText("00:00:00");
+        timerLabel.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 35));
         final LocalTime[] time = {LocalTime.MIDNIGHT};
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
@@ -358,7 +359,7 @@ public class Main extends GameApplication {
         addFoodButton("burger.png", burger, clockBar, topBar, bottomBar);
         addFoodButton("roast-chicken.png", kip, clockBar, topBar, bottomBar);
         addFoodButton("banana.png", banana, clockBar, topBar, bottomBar);
-        
+
         //go back button
         Button goBackButton = createIconButton("back.png", bottomBar);
         goBackButton.setOnAction(new EventHandler<ActionEvent>() {
