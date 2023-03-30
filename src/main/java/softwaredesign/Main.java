@@ -258,7 +258,12 @@ public class Main extends GameApplication {
 
         // Add the UI to the game scene
         FXGL.getGameScene().addUINode(ui);
-
+        button5.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FXGL.getGameScene().addUINode(foodUI(clockBar));
+            }
+        });
         button7.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -267,6 +272,39 @@ public class Main extends GameApplication {
         });
     }
 
+    private VBox foodUI(HBox clockBar) {
+        // Set up the top ui
+        VBox topUi = new VBox();
+        topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
+        topUi.setStyle("-fx-background-color: #1a1a1a;");
+        topUi.setAlignment(Pos.CENTER);
+        topUi.getChildren().add(clockBar);
+
+        // Set up the top bar
+        HBox topBar = new HBox();
+        topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
+        topBar.setStyle("-fx-background-color: #1a1a1a;");
+        topBar.setAlignment(Pos.CENTER);
+        topUi.getChildren().add(topBar);
+
+        // Set up the bottom bar
+        HBox bottomBar = new HBox();
+        bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
+        bottomBar.setStyle("-fx-background-color: #1a1a1a;");
+        bottomBar.setAlignment(Pos.CENTER);
+
+        //set the food items
+        Button burgerButton = createIconButton("burger.png", bottomBar);
+        Button kipButton = createIconButton("burger.png", bottomBar);
+        Button bananaButton = createIconButton("burger.png", bottomBar);
+
+        // Add the bars to the UI
+        VBox ui = new VBox();
+        ui.getChildren().addAll(topUi, bottomBar);
+        ui.setAlignment(Pos.CENTER);
+        ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
+        return ui;
+    }
     private VBox sleepUI(HBox clockBar, Button statsButton) {
         // Set up the top ui
         VBox topUi = new VBox();
@@ -281,6 +319,7 @@ public class Main extends GameApplication {
         topBar.setStyle("-fx-background-color: #1a1a1a;");
         topBar.setAlignment(Pos.CENTER);
         topUi.getChildren().add(topBar);
+
 
         // Set up the bottom bar
         HBox bottomBar = new HBox();

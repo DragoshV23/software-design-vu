@@ -89,6 +89,6 @@ public class Pet implements Serializable {
         this.age = age;
     }
     public void setName(String name) { this.name = name; }
-    public void setMood(int boost) { this.mood += boost; }
+    public void setMood(int boost) { this.mood = boost; }
 
 }
