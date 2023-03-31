@@ -268,7 +268,7 @@ public class Main extends GameApplication {
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                FXGL.getGameScene().addUINode(checkIfDead(clockBar));
+                checkIfDead(clockBar);
             }
         });
 
@@ -479,40 +479,44 @@ public class Main extends GameApplication {
         return ui;
     }
 
-    private VBox checkIfDead(HBox clockBar){ // TODO: separate to different functions
+    private void checkIfDead(HBox clockBar){
         if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
-            // Set up the top ui
-            VBox topUi = new VBox();
-            topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
-            topUi.setStyle("-fx-background-color: #1a1a1a;");
-            topUi.setAlignment(Pos.CENTER);
-            topUi.getChildren().add(clockBar);
+            FXGL.getGameScene().addUINode(deadUI(clockBar));
+            deleteSaveFile();
 
-            // Set up the top bar
-            HBox topBar = new HBox();
-            topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
-            topBar.setStyle("-fx-background-color: #1a1a1a;");
-            topBar.setAlignment(Pos.CENTER);
-            topUi.getChildren().add(topBar);
-
-            // Set up the bottom bar
-            HBox bottomBar = new HBox();
-            bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
-            bottomBar.setStyle("-fx-background-color: #1a1a1a;");
-            bottomBar.setAlignment(Pos.CENTER);
-
-            File f = new File("saveFile.txt");
-
-            f.delete();
-
-            VBox ui = new VBox();
-            ui.getChildren().addAll(topUi, bottomBar);
-            ui.setAlignment(Pos.CENTER);
-            ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
-            return ui;
         }
-        return mainUI(clockBar);
+        FXGL.getGameScene().addUINode(mainUI(clockBar));
     }
+
+    public VBox deadUI(HBox clockbar) {
+        // Set up the top ui
+        VBox topUi = new VBox();
+        topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
+        topUi.setStyle("-fx-background-color: #1a1a1a;");
+        topUi.setAlignment(Pos.CENTER);
+        topUi.getChildren().add(clockBar);
+
+        // Set up the top bar
+        HBox topBar = new HBox();
+        topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
+        topBar.setStyle("-fx-background-color: #1a1a1a;");
+        topBar.setAlignment(Pos.CENTER);
+        topUi.getChildren().add(topBar);
+
+        // Set up the bottom bar
+        HBox bottomBar = new HBox();
+        bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
+        bottomBar.setStyle("-fx-background-color: #1a1a1a;");
+        bottomBar.setAlignment(Pos.CENTER);
+
+        VBox ui = new VBox();
+        ui.getChildren().addAll(topUi, bottomBar);
+        ui.setAlignment(Pos.CENTER);
+        ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
+        return ui;
+    }
+
+    public void deleteSaveFile() {File f = new File("saveFile.txt"); f.delete();}
 
     private Button createIconButton(String imageName, HBox bar) {
         Button button = new Button();
