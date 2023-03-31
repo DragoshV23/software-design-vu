@@ -22,14 +22,14 @@ public class Pet implements Serializable {
     private boolean alive;
 
     public Pet() {
-        race = Race.KIP; // randGenRace();
+        race = Race.DINO; // randGenRace();
         state = State.IDLE;
         gender = randGenGender();
         health = 100;
         energy = 100;
         mood = 100;
         hunger = 100;
-        age = 7;
+        age = 1;
         stage = calcLifeStage(age);
         alive = true;
     }
