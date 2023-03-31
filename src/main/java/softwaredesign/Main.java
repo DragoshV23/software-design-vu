@@ -375,11 +375,6 @@ public class Main extends GameApplication {
         bottomBar.setStyle("-fx-background-color: #1a1a1a;");
         bottomBar.setAlignment(Pos.CENTER);
 
-        addFoodButton("burger.png", burger, clockBar, topBar, bottomBar);
-        addFoodButton("roast-chicken.png", kip, clockBar, topBar, bottomBar);
-        addFoodButton("banana.png", banana, clockBar, topBar, bottomBar);
-
-        //go back button
         Button goBackButton = createIconButton("back.png", bottomBar);
         goBackButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -387,6 +382,13 @@ public class Main extends GameApplication {
                 FXGL.getGameScene().addUINode(mainUI(clockBar));
             }
         });
+        addFoodButton("banana.png", banana, clockBar, topBar, bottomBar);
+        addFoodButton("roast-chicken.png", kip, clockBar, topBar, bottomBar);
+        addFoodButton("burger.png", burger, clockBar, topBar, bottomBar);
+
+
+        //go back button
+
 
         // Add the bars to the UI
         VBox ui = new VBox();
