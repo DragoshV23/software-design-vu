@@ -339,8 +339,7 @@ public class Main extends GameApplication {
         Button button = createIconButton(imageName, bottomBar);
         foodButtonHoverEffect(button, food, topBar);
         button.setOnAction(event -> {
-            pet.feed(food);
-            FXGL.getGameScene().addUINode(mainUI(clockBar));
+            if (user.pay(food)) {pet.feed(food); FXGL.getGameScene().addUINode(mainUI(clockBar));}
         });
     }
 
