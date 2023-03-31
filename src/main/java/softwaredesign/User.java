@@ -1,7 +1,15 @@
 package softwaredesign;
 
 public class User {
-    int balance;
+    private int balance;
+    public User() {
+        this.balance = 0;
+    }
+
+    public boolean pay(Food food) {
+        if (this.balance >= food.getPrice()) {this.balance -= food.getPrice(); return true;}
+        else {return false; }
+    }
 
     public void setBalance(int balance){
         this.balance = balance;

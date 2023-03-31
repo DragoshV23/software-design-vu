@@ -8,31 +8,32 @@ public class AnimationGroup {
     ArrayList<Animation> group = new ArrayList<>();
 
     public AnimationGroup(Pet pet) {
-        Animation eggAnimation = new Animation(pet, LifeStage.EGG, State.IDLE, "eggHatch.png",
-                7, Duration.seconds(10));
-        group.add(eggAnimation);
+        addToGroup(pet, LifeStage.EGG, State.IDLE, "eggHatch.png", 7, Duration.seconds(10));
+        addToGroup(pet, LifeStage.ADULT, State.DEAD, "grave.png", 9, Duration.seconds(9));
+        addToGroup(pet, LifeStage.KID, State.DEAD, "grave.png", 9, Duration.seconds(9));
         switch (pet.getRace()) {
             case KIP:
-                Animation babyIdle = new Animation(pet, LifeStage.KID, State.IDLE, "kipIdle_b.png", 2,
-                        Duration.seconds(1));
-                Animation babySleep = new Animation(pet, LifeStage.KID, State.SLEEP, "kipSleep_b.png", 20,
-                        Duration.seconds(10));
-                Animation babyAngry = new Animation(pet, LifeStage.KID, State.ANGRY, "kipAngry_b.png", 12,
-                        Duration.seconds(6));
-                Animation adultIdle = new Animation(pet, LifeStage.ADULT, State.IDLE, "kipIdle_a.png", 2,
-                        Duration.seconds(1));
-                Animation adultSleep = new Animation(pet, LifeStage.ADULT, State.SLEEP, "kipSleep_a.png", 20,
-                        Duration.seconds(10));
-                Animation adultAngry = new Animation(pet, LifeStage.ADULT, State.ANGRY, "kipAngry_a.png", 8,
-                        Duration.seconds(2));
-                group.add(babyIdle);
-                group.add(babySleep);
-                group.add(babyAngry);
-                group.add(adultIdle);
-                group.add(adultSleep);
-                group.add(adultAngry);
+                addToGroup(pet, LifeStage.KID, State.IDLE, "kipIdle_b.png", 2, Duration.seconds(1));
+                addToGroup(pet, LifeStage.KID, State.SLEEP, "kipSleep_b.png", 20, Duration.seconds(10));
+                addToGroup(pet, LifeStage.KID, State.ANGRY, "kipAngry_b.png", 12, Duration.seconds(6));
+                addToGroup(pet, LifeStage.ADULT, State.IDLE, "kipIdle_a.png", 2, Duration.seconds(1));
+                addToGroup(pet, LifeStage.ADULT, State.SLEEP, "kipSleep_a.png", 20, Duration.seconds(10));
+                addToGroup(pet, LifeStage.ADULT, State.ANGRY, "kipAngry_a.png", 8, Duration.seconds(2));
                 break;
+            case DINO:
+                addToGroup(pet, LifeStage.KID, State.IDLE, "dinoIdle_b.png", 2, Duration.seconds(1));
+                addToGroup(pet, LifeStage.KID, State.SLEEP, "dinoSleep_b.png", 2, Duration.seconds(1));
+                addToGroup(pet, LifeStage.KID, State.ANGRY, "dinoAngry_b.png", 2, Duration.seconds(1));
+                addToGroup(pet, LifeStage.ADULT, State.IDLE, "dinoIdle_a.png", 2, Duration.seconds(1));
+                addToGroup(pet, LifeStage.ADULT, State.SLEEP, "dinoSleep_a.png", 2, Duration.seconds(1));
+                addToGroup(pet, LifeStage.ADULT, State.ANGRY, "dinoAngry_a.png", 2, Duration.seconds(1));
         }
+    }
+
+    private void addToGroup(Pet pet, LifeStage lifestage, State state, String pathName, int frames, Duration duration) {
+        Animation animation = new Animation(pet, lifestage, state, pathName, frames,
+                duration);
+        this.group.add(animation);
     }
 
 }

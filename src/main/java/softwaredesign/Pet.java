@@ -29,7 +29,7 @@ public class Pet implements Serializable {
         energy = 100;
         mood = 100;
         hunger = 100;
-        age = -1;
+        age = 7;
         stage = calcLifeStage(age);
         alive = true;
     }
@@ -65,6 +65,28 @@ public class Pet implements Serializable {
         setAge(this.age + 1);
         setStage(calcLifeStage(this.age));
     }
+    public void sleep() {
+        this.state = State.SLEEP;
+        if (energy < 95) {
+            this.energy += 5;
+        } else {
+            this.energy = 100;
+        }
+
+    }
+
+    public void wake() {
+        this.state = State.IDLE; // TODO: check if every stat above 50 else angry
+        hungry();
+        hungry();
+        dirty();
+        if (mood < 95) {
+            this.mood += 5;
+        } else {
+            this.mood = 100;
+        }
+
+    }
 
     public void improveMood() {
         if (this.mood > 75) {
@@ -96,6 +118,10 @@ public class Pet implements Serializable {
     }
     public void dirty() {
         this.health = this.health - 10;
+    }
+
+    public void die() {
+        this.state = State.DEAD;
     }
 
     public Race getRace() {return race; }
