@@ -29,7 +29,7 @@ public class Pet implements Serializable {
         energy = 100;
         mood = 100;
         hunger = 100;
-        age = -1;
+        age = 7;
         stage = calcLifeStage(age);
         alive = true;
     }
@@ -118,6 +118,10 @@ public class Pet implements Serializable {
     }
     public void dirty() {
         this.health = this.health - 10;
+    }
+
+    public void die() {
+        this.state = State.DEAD;
     }
 
     public Race getRace() {return race; }

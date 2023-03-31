@@ -481,6 +481,8 @@ public class Main extends GameApplication {
 
     private void checkIfDead(HBox clockBar){
         if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
+            pet.die();
+            petEntity.getComponent(AnimationComponent.class).setAnim(pet);
             FXGL.getGameScene().addUINode(deadUI(clockBar));
             deleteSaveFile();
 

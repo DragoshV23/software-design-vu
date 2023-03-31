@@ -9,6 +9,8 @@ public class AnimationGroup {
 
     public AnimationGroup(Pet pet) {
         addToGroup(pet, LifeStage.EGG, State.IDLE, "eggHatch.png", 7, Duration.seconds(10));
+        addToGroup(pet, LifeStage.ADULT, State.DEAD, "grave.png", 9, Duration.seconds(9));
+        addToGroup(pet, LifeStage.KID, State.DEAD, "grave.png", 9, Duration.seconds(9));
         switch (pet.getRace()) {
             case KIP:
                 addToGroup(pet, LifeStage.KID, State.IDLE, "kipIdle_b.png", 2, Duration.seconds(1));

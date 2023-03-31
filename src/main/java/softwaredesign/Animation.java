@@ -2,7 +2,7 @@ package softwaredesign;
 
 import javafx.util.Duration;
 
-enum State { IDLE, SLEEP, ANGRY }
+enum State { IDLE, SLEEP, ANGRY, DEAD }
 
 public class Animation {
     private Race race;
