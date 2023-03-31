@@ -306,7 +306,6 @@ public class Main extends GameApplication {
         return ui;
     }
 
-
     //***************************** FOOD UI UTILS *****************************
     void foodButtonHoverEffect(Button button, Food food, HBox topBar){
         button.setOnMouseEntered(event -> {

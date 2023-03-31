@@ -1,0 +1,14 @@
+
+^
+java:S4973N"<Strings and Boxed types should be compared using "equals()".(â—˜¸şÿÿÿÿ8éÌ‰»ó0
+^
+java:S4973N"<Strings and Boxed types should be compared using "equals()".(â—˜¸şÿÿÿÿ8éÌ‰»ó0
+X	java:S125"<This block of commented-out lines of code should be removed.(ƒƒê¼8­™°ó0
+:
+java:S2119'"Save and re-use this "Random".(¼İÅf8¯™°ó0
+:
+java:S2119-"Save and re-use this "Random".(¼İÅf8¯™°ó0
+F
+java:S1068")Remove this unused "alive" private field.(©öÒ‚8³™°ó0
+R
+java:S1144%"0Remove this unused private "randGenRace" method.(­ë×ñşÿÿÿÿ8³™°ó0
