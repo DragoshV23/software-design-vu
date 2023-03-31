@@ -484,11 +484,10 @@ public class Main extends GameApplication {
             FXGL.getGameScene().addUINode(deadUI(clockBar));
             deleteSaveFile();
 
-        }
-        FXGL.getGameScene().addUINode(mainUI(clockBar));
+        } else {FXGL.getGameScene().addUINode(mainUI(clockBar)); }
     }
 
-    public VBox deadUI(HBox clockbar) {
+    public VBox deadUI(HBox clockBar) {
         // Set up the top ui
         VBox topUi = new VBox();
         topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
