@@ -3,4 +3,9 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11" />
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="software-design-vu-2020.main" options="--add-exports jdk.javadoc/jdk.javadoc.internal.doclets.formats.html.markup=ALL-UNNAMED" />
+    </option>
+  </component>
 </project>
