@@ -64,8 +64,11 @@ public class Main extends GameApplication {
         settings.setWidth(32 * 16);
     }
     // Create pet
-    Pet pet = Pet.getInstance();
-    Entity petEntity;
+    static Pet pet = Pet.getInstance();
+    public static void animatePet() {
+        petEntity.getComponent(AnimationComponent.class).setAnim(pet);
+    }
+    static Entity petEntity;
     // create user
     User user = new User();
     // create food
@@ -73,7 +76,7 @@ public class Main extends GameApplication {
     Food kip = new Food("Roasted Kip", 20, 35);
     Food banana = new Food("Bananas", 5, 10);
 
-    private void save() {
+    public static void save() {
         try {
             FileOutputStream f = new FileOutputStream(new File("saveFile.txt"));
             ObjectOutputStream o = new ObjectOutputStream(f);
@@ -203,101 +206,6 @@ public class Main extends GameApplication {
         FXGL.getGameScene().addUINode(new MainUI(clockBar));
     }
 
-    public class MainUI extends BaseUI {
-
-        public MainUI(HBox clockBar) {
-            super(clockBar);
-            addAdditionalComponents();
-            VBox ui = createUI(getTopUi(), getBottomBar());
-            this.getChildren().add(ui);
-        }
-
-        private void addAdditionalComponents() {
-            // Add additional components and their functionalities here
-
-            //TOP BUTTONS
-            Button button1 = createIconButton("shopping-cart.png", getTopBar());
-            Button button2 = createIconButton("", getTopBar());
-            Button button3 = createIconButton("resetClock.png", getTopBar());
-            Button button4 = createIconButton("diskette.png", getTopBar());
-
-            //BOTTOM BUTTONS
-            Button button5 = createIconButton("knife-and-fork.png", getBottomBar());
-            Button button6 = createIconButton("games.png", getBottomBar());
-            Button button7 = createIconButton("sleep.png", getBottomBar());
-            Button button8 = createIconButton("graph.png", getBottomBar());
-
-            //popup
-            Popup popup = new Popup();
-            Label popupLabel = new Label();
-
-            popupLabel.setMinWidth(300);
-            popupLabel.setMinHeight(380);
-            popupLabel.setStyle("-fx-background-color:#FAF9F6; -fx-font-size:25");
-            popupLabel.setPadding(new Insets(20));
-            popup.getContent().add(popupLabel);
-
-            button8.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    if(!popup.isShowing()){
-                        popupLabel.setText(pet.getName() + " stats " +
-                                "\nMood: " + pet.getMood() +
-                                "\nHealth: " + pet.getHealth() +
-                                "\nHunger: " + pet.getHunger() +
-                                "\nEnergy: " + pet.getEnergy());
-                        popup.show(FXGL.getPrimaryStage());
-                    }
-                    else{
-                        popup.hide();
-                    }
-                }
-            });
-
-            button2.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    checkIfDead(getClockBar());
-                }
-            });
-
-            button3.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    initUI();
-                }
-            });
-            // save/creates saveFile.txt
-            button4.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    if (pet.getStage() != LifeStage.EGG)
-                        save();
-                }
-            });
-
-            button5.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    FXGL.getGameScene().addUINode(foodUI(getClockBar()));
-                }
-            });
-
-            button7.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    pet.sleep();
-                    petEntity.getComponent(AnimationComponent.class).setAnim(pet);
-                    getGameTimer().runAtInterval(() -> {
-                        pet.sleep();
-                    }, Duration.seconds(10));
-                    FXGL.getGameScene().addUINode(sleepUI(getClockBar(), button8));
-                }
-            });
-
-        }
-
-    }
 
     //***************************** FOOD UI UTILS *****************************
     void foodButtonHoverEffect(Button button, Food food, HBox topBar){
@@ -380,50 +288,7 @@ public class Main extends GameApplication {
         ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
         return ui;
     }
-
-    private VBox sleepUI(HBox clockBar, Button statsButton) {
-        // Set up the top ui
-        VBox topUi = new VBox();
-        topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
-        topUi.setStyle("-fx-background-color: #1a1a1a;");
-        topUi.setAlignment(Pos.CENTER);
-        topUi.getChildren().add(clockBar);
-
-        // Set up the top bar
-        HBox topBar = new HBox();
-        topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
-        topBar.setStyle("-fx-background-color: #1a1a1a;");
-        topBar.setAlignment(Pos.CENTER);
-        topUi.getChildren().add(topBar);
-
-
-        // Set up the bottom bar
-        HBox bottomBar = new HBox();
-        bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
-        bottomBar.setStyle("-fx-background-color: #1a1a1a;");
-        bottomBar.setAlignment(Pos.CENTER);
-
-        // wake up Button
-        Button wakeButton = createIconButton("wake-up.png", bottomBar);
-        wakeButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                pet.wake();
-                petEntity.getComponent(AnimationComponent.class).setAnim(pet);
-                FXGL.getGameScene().addUINode(new MainUI(clockBar));
-            }
-        });
-
-        bottomBar.getChildren().add(statsButton);
-
-        // Add the bars to the UI
-        VBox ui = new VBox();
-        ui.getChildren().addAll(topUi, bottomBar);
-        ui.setAlignment(Pos.CENTER);
-        ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
-        return ui;
-    }
-
+    
     private void checkIfDead(HBox clockBar){
         if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
             pet.die();
@@ -464,7 +329,7 @@ public class Main extends GameApplication {
 
     public void deleteSaveFile() {File f = new File("saveFile.txt"); f.delete();}
 
-    private Button createIconButton(String imageName, HBox bar) {
+    private static Button createIconButton(String imageName, HBox bar) {
         Button button = new Button();
         Image icon = getAssetLoader().loadImage(imageName);
         ImageView iconView = new ImageView(icon);
