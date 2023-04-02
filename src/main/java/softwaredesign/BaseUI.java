@@ -6,15 +6,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public abstract class BaseUI extends VBox {
-    protected VBox topUi;
-    protected HBox topBar;
-    protected HBox bottomBar;
+    private VBox topUi;
+    private HBox topBar;
+    private HBox bottomBar;
+    private HBox clockBar;
 
     public BaseUI(HBox clockBar) {
-        setupBaseUI(clockBar);
+        this.clockBar = clockBar;
+        setupBaseUI();
     }
 
-    protected void setupBaseUI(HBox clockBar) {
+    private void setupBaseUI() {
         // Set up the top ui
         topUi = new VBox();
         topUi.setPrefSize(FXGL.getAppWidth(), 14 * 16);
@@ -47,6 +49,11 @@ public abstract class BaseUI extends VBox {
         ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
         return ui;
     }
+
+    protected VBox getTopUi() { return this.topUi; }
+    protected HBox getTopBar() { return this.topBar; }
+    protected HBox getBottomBar() { return this.bottomBar; }
+    protected HBox getClockBar() { return this.clockBar; }
 
 }
 

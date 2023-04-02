@@ -209,7 +209,7 @@ public class Main extends GameApplication {
         public MainUI(HBox clockBar) {
             super(clockBar);
             addAdditionalComponents(clockBar);
-            VBox ui = createUI(topUi, bottomBar);
+            VBox ui = createUI(getTopUi(), getBottomBar());
             this.getChildren().add(ui);
         }
 
@@ -217,16 +217,16 @@ public class Main extends GameApplication {
             // Add additional components and their functionalities here
 
             //TOP BUTTONS
-            Button button1 = createIconButton("shopping-cart.png", topBar);
-            Button button2 = createIconButton("", topBar);
-            Button button3 = createIconButton("resetClock.png", topBar);
-            Button button4 = createIconButton("diskette.png", topBar);
+            Button button1 = createIconButton("shopping-cart.png", getTopBar());
+            Button button2 = createIconButton("", getTopBar());
+            Button button3 = createIconButton("resetClock.png", getTopBar());
+            Button button4 = createIconButton("diskette.png", getTopBar());
 
             //BOTTOM BUTTONS
-            Button button5 = createIconButton("knife-and-fork.png", bottomBar);
-            Button button6 = createIconButton("games.png", bottomBar);
-            Button button7 = createIconButton("sleep.png", bottomBar);
-            Button button8 = createIconButton("graph.png", bottomBar);
+            Button button5 = createIconButton("knife-and-fork.png", getBottomBar());
+            Button button6 = createIconButton("games.png", getBottomBar());
+            Button button7 = createIconButton("sleep.png", getBottomBar());
+            Button button8 = createIconButton("graph.png", getBottomBar());
 
             //popup
             Popup popup = new Popup();
