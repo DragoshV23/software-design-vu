@@ -23,23 +23,29 @@ public class SleepUI extends BaseUI {
     private void addAdditionalComponents() {
         Button wakeButton = createIconButton("wake-up.png", getBottomBar());
         Button statsButton = createIconButton("graph.png", getBottomBar());
+
+        //popup
+        Popup popup = new Popup();
+        Label popupLabel = new Label();
+
+        popupLabel.setMinWidth(300);
+        popupLabel.setMinHeight(380);
+        popupLabel.setStyle("-fx-background-color:#FAF9F6; -fx-font-size:25");
+        popupLabel.setPadding(new Insets(20));
+        popup.getContent().add(popupLabel);
+
         wakeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                if(popup.isShowing()){
+                    popup.hide();
+                }
                 pet.wake();
                 Main.animatePet();
                 FXGL.getGameScene().addUINode(new MainUI(getClockBar()));
             }
         });
-            //popup
-            Popup popup = new Popup();
-            Label popupLabel = new Label();
 
-            popupLabel.setMinWidth(300);
-            popupLabel.setMinHeight(380);
-            popupLabel.setStyle("-fx-background-color:#FAF9F6; -fx-font-size:25");
-            popupLabel.setPadding(new Insets(20));
-            popup.getContent().add(popupLabel);
         statsButton.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                 public void handle(ActionEvent actionEvent) {
