@@ -56,18 +56,9 @@ public class FoodUI extends BaseUI {
             }
         });
 
-        addFoodButton("burger.png",
-                (Food) foodShop.getStock().get(0),
-                getClockBar(), getTopBar(), getBottomBar()
-        );
-        addFoodButton("roast-chicken.png",
-                (Food) foodShop.getStock().get(1),
-                getClockBar(), getTopBar(), getBottomBar()
-        );
-        addFoodButton("banana.png",
-                (Food) foodShop.getStock().get(2),
-                getClockBar(), getTopBar(), getBottomBar()
-        );
+        addFoodButton("burger.png", (Food) foodShop.getStock().get(0));
+        addFoodButton("roast-chicken.png", (Food) foodShop.getStock().get(1));
+        addFoodButton("banana.png", (Food) foodShop.getStock().get(2));
     }
     void foodButtonHoverEffect(Button button, Food food) {
         Node balanceDisplay = getTopBar().getChildren().get(0);
@@ -87,12 +78,12 @@ public class FoodUI extends BaseUI {
             getTopBar().getChildren().add(balanceDisplay);
         });
     }
-    private void addFoodButton(String imageName, Food food, HBox clockBar, HBox topBar, HBox bottomBar) {
-        Button button = createIconButton(imageName, bottomBar);
+    private void addFoodButton(String imageName, Food food) {
+        Button button = createIconButton(imageName, getBottomBar());
         foodButtonHoverEffect(button, food);
         button.setOnAction(event -> {
             pet.feed(food);
-            FXGL.getGameScene().addUINode(new MainUI(clockBar));
+            FXGL.getGameScene().addUINode(new MainUI(getClockBar()));
         });
     }
 }

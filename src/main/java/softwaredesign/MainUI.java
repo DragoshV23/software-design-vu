@@ -47,6 +47,13 @@ public class MainUI extends BaseUI {
         popupLabel.setPadding(new Insets(20));
         popup.getContent().add(popupLabel);
 
+        button1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FXGL.getGameScene().addUINode(new BackgroundUI(getClockBar()));
+            }
+        });
+
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
