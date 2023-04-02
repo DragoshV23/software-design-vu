@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
+
 public class BackgroundUI extends BaseUI {
     private User user;
     private Shop backgroundShop;
@@ -19,6 +21,9 @@ public class BackgroundUI extends BaseUI {
         this.user = User.getInstance();
 
         Background retroBackground = new Background("retro", 50, "ogbg.png");
+        ArrayList<Item> stock = new ArrayList<>();
+        stock.add(retroBackground);
+        this.backgroundShop = new Shop("Background Shop", stock);
 
         addAdditionalComponents();
         VBox ui = createUI(getTopUi(), getBottomBar());
@@ -41,13 +46,15 @@ public class BackgroundUI extends BaseUI {
                 FXGL.getGameScene().addUINode(new MainUI(getClockBar()));
             }
         });
+
+        addBackgroundButton("ogbg.png", (Background) backgroundShop.getStock().get(0));
     }
 
     void backgroundButtonHoverEffect(Button button, Background background) {
-        Node balanceDisplay = getTopBar().getChildren().get(0);
+        Node balanceDisplay = getBottomBar().getChildren().get(0);
         button.setOnMouseEntered(event -> {
-            FXGL.getGameScene().setBackgroundRepeat(background.backgroundImage);
-            getTopBar().getChildren().clear();
+            FXGL.getGameScene().setBackgroundRepeat(background.getBackgroundImage());
+            getBottomBar().getChildren().clear();
             String backgroundLabel = background.getName() + "\nPrice: $" + background.getPrice();
             Label backgroundProperty = new Label(backgroundLabel);
 
@@ -64,10 +71,10 @@ public class BackgroundUI extends BaseUI {
     }
 
     private void addBackgroundButton(String iconPath, Background background) {
-        Button button = createIconButton(iconPath, getBottomBar());
+        Button button = createIconButton(iconPath, getTopBar());
         backgroundButtonHoverEffect(button, background);
         button.setOnAction(event -> {
-            FXGL.getGameScene().setBackgroundRepeat(background.backgroundImage);
+            FXGL.getGameScene().setBackgroundRepeat(background.getBackgroundImage());
             FXGL.getGameScene().addUINode(new MainUI(getClockBar()));
         });
     }
