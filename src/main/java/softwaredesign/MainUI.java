@@ -27,7 +27,7 @@ public class MainUI extends BaseUI {
 
         //TOP BUTTONS
         Button button1 = createIconButton("shopping-cart.png", getTopBar());
-        Button button2 = createIconButton("shower.png", getTopBar());
+        Button button2 = createIconButton("graph.png", getTopBar());
         Button button3 = createIconButton("resetClock.png", getTopBar());
         Button button4 = createIconButton("diskette.png", getTopBar());
 
@@ -35,7 +35,7 @@ public class MainUI extends BaseUI {
         Button button5 = createIconButton("knife-and-fork.png", getBottomBar());
         Button button6 = createIconButton("games.png", getBottomBar());
         Button button7 = createIconButton("sleep.png", getBottomBar());
-        Button button8 = createIconButton("graph.png", getBottomBar());
+        Button button8 = createIconButton("shower.png", getBottomBar());
 
         //Popup
         Popup popup = new Popup();
@@ -47,7 +47,7 @@ public class MainUI extends BaseUI {
         popupLabel.setPadding(new Insets(20));
         popup.getContent().add(popupLabel);
 
-        button8.setOnAction(new EventHandler<ActionEvent>() {
+        button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(!popup.isShowing()){
@@ -64,7 +64,7 @@ public class MainUI extends BaseUI {
             }
         });
 
-        button2.setOnAction(new EventHandler<ActionEvent>() {
+        button8.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 pet.setHealth(100);
