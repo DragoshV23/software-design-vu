@@ -152,5 +152,6 @@ public class Pet implements Serializable {
     public void setName(String name) { this.name = name; }
     public void setMood(int boost) { this.mood = boost; }
     public void setHunger(int boost) { this.hunger = boost; }
+    public void setHealth(int boost) { this.health = boost; }
 
 }

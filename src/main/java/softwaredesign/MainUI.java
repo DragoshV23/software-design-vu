@@ -27,7 +27,7 @@ public class MainUI extends BaseUI {
 
         //TOP BUTTONS
         Button button1 = createIconButton("shopping-cart.png", getTopBar());
-        Button button2 = createIconButton("", getTopBar());
+        Button button2 = createIconButton("shower.png", getTopBar());
         Button button3 = createIconButton("resetClock.png", getTopBar());
         Button button4 = createIconButton("diskette.png", getTopBar());
 
@@ -67,7 +67,7 @@ public class MainUI extends BaseUI {
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Main.checkIfDead(getClockBar());
+                pet.setHealth(100);
             }
         });
 
