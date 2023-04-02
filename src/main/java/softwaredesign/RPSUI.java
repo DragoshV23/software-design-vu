@@ -13,6 +13,7 @@ public class RPSUI extends BaseUI {
     private final Label outcomeLabel;
     private final Pet pet;
     private final User user;
+    private int reward;
 
     public RPSUI(HBox clockBar, Pet pet, User user) {
         super(clockBar);
@@ -55,7 +56,6 @@ public class RPSUI extends BaseUI {
     private void play(Choice userChoice) {
         rpsGame.setUserChoice(userChoice);
         Outcome outcome = rpsGame.calculateOutcome();
-        updateOutcomeLabel(outcome);
 
         pet.improveMood(); // Pet's mood is increased no matter the outcome
 
@@ -70,19 +70,23 @@ public class RPSUI extends BaseUI {
                 // User gets nothing if they lose, or maybe -5?
                 break;
         }
+        updateMessageLabel(userChoice, rpsGame.getPetChoice(), outcome, reward);
     }
 
-    private void updateOutcomeLabel(Outcome outcome) {
+    private void updateMessageLabel(Choice userChoice, Choice petChoice, Outcome outcome, int reward) {
+        String outcomeMessage = "";
         switch (outcome) {
             case DRAW:
-                outcomeLabel.setText("It's a draw!");
+                outcomeMessage = "It's a draw!";
                 break;
             case WIN:
-                outcomeLabel.setText("You win!");
+                outcomeMessage = "You win!";
                 break;
             case LOSE:
-                outcomeLabel.setText("You lose!");
+                outcomeMessage = "You lose!";
                 break;
         }
+        String rewardMessage = outcome == Outcome.LOSE ? "You get no money." : "You get $" + reward + ", pet mood improved by 25!";
+        outcomeLabel.setText("You chose " + userChoice + ", pet chose " + petChoice + ". " + rewardMessage + " " + outcomeMessage);
     }
 }
