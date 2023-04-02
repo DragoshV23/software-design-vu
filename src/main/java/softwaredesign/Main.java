@@ -2,59 +2,28 @@ package softwaredesign;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
-import com.almasb.fxgl.core.serialization.Bundle;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.input.Input;
-import com.almasb.fxgl.input.UserAction;
-import com.almasb.fxgl.input.view.KeyView;
-import com.almasb.fxgl.input.view.MouseButtonView;
 import com.almasb.fxgl.profile.DataFile;
-import com.almasb.fxgl.profile.SaveLoadHandler;
-import com.almasb.fxgl.ui.DialogBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.ReadOnlyBooleanWrapper;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Window;
 import javafx.util.Duration;
 import java.io.*;
 import java.time.LocalTime;
-import java.util.Map;
 import java.util.Optional;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-
-
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Main extends GameApplication {
     private static final int BUTTON_COUNT = 4;
     DataFile dataFile = new DataFile();
-
-
     @Override
     protected void initSettings(GameSettings settings){
 
@@ -69,12 +38,6 @@ public class Main extends GameApplication {
         petEntity.getComponent(AnimationComponent.class).setAnim(pet);
     }
     static Entity petEntity;
-    // create user
-    User user = new User();
-    // create food
-    Food burger = new Food("Burger", 10, 25);
-    Food kip = new Food("Roasted Kip", 20, 35);
-    Food banana = new Food("Bananas", 5, 10);
 
     public static void save() {
         try {
@@ -89,6 +52,7 @@ public class Main extends GameApplication {
             System.out.println("Error initializing stream");
         }
     }
+
     private void load() {
         try {
             FileInputStream f = new FileInputStream(new File("saveFile.txt"));
@@ -108,16 +72,13 @@ public class Main extends GameApplication {
             e.printStackTrace();
         }
     }
-    @Override
-    protected void onPreInit() {
-
-    }
 
     @Override
     protected void initGame() {
         loadOrCreatePet();
         reducePetStats(Duration.seconds(6));
     }
+
     private void loadOrCreatePet() {
         File f = new File("saveFile.txt");
         if(f.exists() && !f.isDirectory()) {
@@ -158,6 +119,7 @@ public class Main extends GameApplication {
             }, Duration.seconds(10));
         }
     }
+
     private void reducePetStats(Duration interval) {
         getGameTimer().runAtInterval(() -> {
             if (pet.getStage() != LifeStage.EGG) {
@@ -168,6 +130,7 @@ public class Main extends GameApplication {
             }
         }, interval);
     }
+
     @Override
     protected  void initInput() {}
 
@@ -206,89 +169,6 @@ public class Main extends GameApplication {
         FXGL.getGameScene().addUINode(new MainUI(clockBar));
     }
 
-
-    //***************************** FOOD UI UTILS *****************************
-    void foodButtonHoverEffect(Button button, Food food, HBox topBar){
-        Node balanceDisplay = topBar.getChildren().get(0);
-        button.setOnMouseEntered(event -> {
-            topBar.getChildren().clear();
-            String foodLabel = food.getName() + "\nPrice: $" + food.getPrice() +  "\nNutritional value: " + food.getNutritionVal();
-            Label foodProperty = new Label(foodLabel);
-
-            foodProperty.setTextFill(Color.WHITE);
-            foodProperty.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 20));
-            topBar.getChildren().add(foodProperty);
-        });
-
-
-        button.setOnMouseExited(event -> {
-            topBar.getChildren().clear();
-            topBar.getChildren().add(balanceDisplay);
-        });
-    }
-
-    private void addFoodButton(String imageName, Food food, HBox clockBar, HBox topBar, HBox bottomBar) {
-        Button button = createIconButton(imageName, bottomBar);
-        foodButtonHoverEffect(button, food, topBar);
-        button.setOnAction(event -> {
-            pet.feed(food);
-            FXGL.getGameScene().addUINode(new MainUI(clockBar));
-        });
-    }
-
-    //***************************** FOOD UI UTILS *****************************
-    private VBox foodUI(HBox clockBar) { //TODO: refactor
-        // Set up the top ui
-        VBox topUi = new VBox();
-        topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
-        topUi.setStyle("-fx-background-color: #1a1a1a;");
-        topUi.setAlignment(Pos.CENTER);
-        topUi.getChildren().add(clockBar);
-
-
-
-        // Set up the top bar
-        HBox topBar = new HBox();
-        topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
-        topBar.setStyle("-fx-background-color: #1a1a1a;");
-        topBar.setAlignment(Pos.CENTER);
-        topUi.getChildren().add(topBar);
-
-        // Add user balance
-        String balanceString = "Balance: $" + user.getBalance();
-        Label balanceLabel = new Label(balanceString);
-
-        balanceLabel.setTextFill(Color.WHITE);
-        balanceLabel.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 20));
-        topBar.getChildren().add(balanceLabel);
-
-        // Set up the bottom bar
-        HBox bottomBar = new HBox();
-        bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
-        bottomBar.setStyle("-fx-background-color: #1a1a1a;");
-        bottomBar.setAlignment(Pos.CENTER);
-
-        addFoodButton("burger.png", burger, clockBar, topBar, bottomBar);
-        addFoodButton("roast-chicken.png", kip, clockBar, topBar, bottomBar);
-        addFoodButton("banana.png", banana, clockBar, topBar, bottomBar);
-
-        //go back button
-        Button goBackButton = createIconButton("back.png", bottomBar);
-        goBackButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                FXGL.getGameScene().addUINode(new MainUI(clockBar));
-            }
-        });
-
-        // Add the bars to the UI
-        VBox ui = new VBox();
-        ui.getChildren().addAll(topUi, bottomBar);
-        ui.setAlignment(Pos.CENTER);
-        ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
-        return ui;
-    }
-
     static void checkIfDead(HBox clockBar){
         if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
             pet.die();
@@ -299,20 +179,7 @@ public class Main extends GameApplication {
         } else {FXGL.getGameScene().addUINode(new MainUI(clockBar)); }
     }
 
-
     public static void deleteSaveFile() {File f = new File("saveFile.txt"); f.delete();}
-
-    private static Button createIconButton(String imageName, HBox bar) {
-        Button button = new Button();
-        Image icon = getAssetLoader().loadImage(imageName);
-        ImageView iconView = new ImageView(icon);
-        iconView.setFitHeight(80);
-        iconView.setFitWidth(80);
-        button.setGraphic(iconView);
-        button.setPrefSize(80, 80);
-        bar.getChildren().add(button);
-        return button;
-    }
 
     public static void main(String[] args) {
         launch(args);

@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class Shop {
     String name;
     ArrayList<Item> stock = new ArrayList<>();
+    public Shop(String name, ArrayList<Item> stock) {
+        this.name = name;
+        this.stock = stock;
+    }
 
     public void setName(String name){
         this.name = name;
     }
-
-    //idk if there should a setter for stock?
 
     public String getName() {return name; }
 

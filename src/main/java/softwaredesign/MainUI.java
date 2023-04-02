@@ -89,7 +89,7 @@ public class MainUI extends BaseUI {
         button5.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // FXGL.getGameScene().addUINode(foodUI(getClockBar()));
+                FXGL.getGameScene().addUINode(new FoodUI(getClockBar()));
             }
         });
 
