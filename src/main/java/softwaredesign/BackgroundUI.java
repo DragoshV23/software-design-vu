@@ -16,6 +16,10 @@ public class BackgroundUI extends BaseUI {
     private Shop backgroundShop;
     public BackgroundUI(HBox clockBar) {
         super(clockBar);
+        this.user = User.getInstance();
+
+        Background retroBackground = new Background("retro", 50, "ogbg.png");
+
         addAdditionalComponents();
         VBox ui = createUI(getTopUi(), getBottomBar());
         this.getChildren().add(ui);
@@ -39,9 +43,10 @@ public class BackgroundUI extends BaseUI {
         });
     }
 
-    void foodButtonHoverEffect(Button button, Background background) {
+    void backgroundButtonHoverEffect(Button button, Background background) {
         Node balanceDisplay = getTopBar().getChildren().get(0);
         button.setOnMouseEntered(event -> {
+            FXGL.getGameScene().setBackgroundRepeat(background.backgroundImage);
             getTopBar().getChildren().clear();
             String backgroundLabel = background.getName() + "\nPrice: $" + background.getPrice();
             Label backgroundProperty = new Label(backgroundLabel);
@@ -52,15 +57,17 @@ public class BackgroundUI extends BaseUI {
         });
 
         button.setOnMouseExited(event -> {
+            FXGL.getGameScene().setBackgroundColor(Color.WHITE);
             getBottomBar().getChildren().clear();
             getBottomBar().getChildren().add(balanceDisplay);
         });
     }
 
-    private void addBackgroundButton(String imageName, Background background) {
-        Button button = createIconButton(imageName, getBottomBar());
-        foodButtonHoverEffect(button, background);
+    private void addBackgroundButton(String iconPath, Background background) {
+        Button button = createIconButton(iconPath, getBottomBar());
+        backgroundButtonHoverEffect(button, background);
         button.setOnAction(event -> {
+            FXGL.getGameScene().setBackgroundRepeat(background.backgroundImage);
             FXGL.getGameScene().addUINode(new MainUI(getClockBar()));
         });
     }
