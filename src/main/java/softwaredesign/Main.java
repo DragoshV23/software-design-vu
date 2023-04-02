@@ -288,46 +288,19 @@ public class Main extends GameApplication {
         ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
         return ui;
     }
-    
-    private void checkIfDead(HBox clockBar){
+
+    static void checkIfDead(HBox clockBar){
         if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
             pet.die();
-            petEntity.getComponent(AnimationComponent.class).setAnim(pet);
-            FXGL.getGameScene().addUINode(deadUI(clockBar));
+            animatePet();
+            FXGL.getGameScene().addUINode(new DeadUI(clockBar));
             deleteSaveFile();
 
         } else {FXGL.getGameScene().addUINode(new MainUI(clockBar)); }
     }
 
-    public VBox deadUI(HBox clockBar) {
-        // Set up the top ui
-        VBox topUi = new VBox();
-        topUi.setPrefSize(FXGL.getAppWidth(),14 * 16);
-        topUi.setStyle("-fx-background-color: #1a1a1a;");
-        topUi.setAlignment(Pos.CENTER);
-        topUi.getChildren().add(clockBar);
 
-        // Set up the top bar
-        HBox topBar = new HBox();
-        topBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
-        topBar.setStyle("-fx-background-color: #1a1a1a;");
-        topBar.setAlignment(Pos.CENTER);
-        topUi.getChildren().add(topBar);
-
-        // Set up the bottom bar
-        HBox bottomBar = new HBox();
-        bottomBar.setPrefSize(FXGL.getAppWidth(), 6 * 16);
-        bottomBar.setStyle("-fx-background-color: #1a1a1a;");
-        bottomBar.setAlignment(Pos.CENTER);
-
-        VBox ui = new VBox();
-        ui.getChildren().addAll(topUi, bottomBar);
-        ui.setAlignment(Pos.CENTER);
-        ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
-        return ui;
-    }
-
-    public void deleteSaveFile() {File f = new File("saveFile.txt"); f.delete();}
+    public static void deleteSaveFile() {File f = new File("saveFile.txt"); f.delete();}
 
     private static Button createIconButton(String imageName, HBox bar) {
         Button button = new Button();

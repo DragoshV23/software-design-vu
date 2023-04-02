@@ -67,7 +67,7 @@ public class MainUI extends BaseUI {
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-               // checkIfDead(getClockBar());
+                Main.checkIfDead(getClockBar());
             }
         });
 
