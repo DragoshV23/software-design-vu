@@ -120,12 +120,15 @@ public class Pet implements Serializable {
     public void hungry() {
         this.hunger = this.hunger - 10;
     }
+
     public void tired() {
         this.energy = this.energy - 10;
     }
+
     public void bored() {
         this.mood = this.mood - 10;
     }
+
     public void dirty() {
         this.health = this.health - 10;
     }
@@ -135,23 +138,35 @@ public class Pet implements Serializable {
     }
 
     public Race getRace() {return race; }
+
     public int getAge() {return age; }
+
     public State getState() {return state; }
+
     public LifeStage getStage() {return stage; }
+
     public Gender getGender() {return gender; }
+
     public String getName() {return name; }
+
     public int getHealth() {return health; }
+
     public int getEnergy() {return energy; }
+
     public int getMood() {return mood; }
+
     public int getHunger() {return hunger; }
+
     private void setStage(LifeStage stage) {this.stage = stage; }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+    public void setAge(int age) { this.age = age; }
+
     public void setName(String name) { this.name = name; }
+
     public void setMood(int boost) { this.mood = boost; }
+
     public void setHunger(int boost) { this.hunger = boost; }
+
     public void setHealth(int boost) { this.health = boost; }
 
 }
