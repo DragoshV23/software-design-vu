@@ -298,18 +298,6 @@ public class Main extends GameApplication {
 
         }
 
-        private Button createIconButton(String imageName, HBox bar) {
-            Button button = new Button();
-            Image icon = getAssetLoader().loadImage(imageName);
-            ImageView iconView = new ImageView(icon);
-            iconView.setFitHeight(80);
-            iconView.setFitWidth(80);
-            button.setGraphic(iconView);
-            button.setPrefSize(80, 80);
-            bar.getChildren().add(button);
-            return button;
-        }
-
     }
 
 

@@ -2,8 +2,13 @@ package softwaredesign;
 
 import com.almasb.fxgl.dsl.FXGL;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import static com.almasb.fxgl.dsl.FXGL.getAssetLoader;
 
 public abstract class BaseUI extends VBox {
     private VBox topUi;
@@ -49,7 +54,17 @@ public abstract class BaseUI extends VBox {
         ui.setSpacing(FXGL.getAppHeight() - topUi.getPrefHeight() - bottomBar.getPrefHeight());
         return ui;
     }
-
+    protected Button createIconButton(String imageName, HBox bar) {
+        Button button = new Button();
+        Image icon = getAssetLoader().loadImage(imageName);
+        ImageView iconView = new ImageView(icon);
+        iconView.setFitHeight(80);
+        iconView.setFitWidth(80);
+        button.setGraphic(iconView);
+        button.setPrefSize(80, 80);
+        bar.getChildren().add(button);
+        return button;
+    }
     protected VBox getTopUi() { return this.topUi; }
     protected HBox getTopBar() { return this.topBar; }
     protected HBox getBottomBar() { return this.bottomBar; }
