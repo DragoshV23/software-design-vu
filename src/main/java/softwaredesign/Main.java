@@ -63,9 +63,8 @@ public class Main extends GameApplication {
         settings.setHeight(37 * 16);
         settings.setWidth(32 * 16);
     }
-
-    Pet pet = new Pet();
-    //Create the pet
+    // Create pet
+    Pet pet = Pet.getInstance();
     Entity petEntity;
     // create user
     User user = new User();

@@ -9,6 +9,7 @@ enum LifeStage { EGG, KID, ADULT }
 enum Gender {MALE, FEMALE}
 
 public class Pet implements Serializable {
+    private static volatile Pet instance;
     private String name;
     private Race race;
     private LifeStage stage;
@@ -21,7 +22,7 @@ public class Pet implements Serializable {
     private int age;
     private boolean alive;
 
-    public Pet() {
+    private Pet() {
         race = Race.LLAMA; // randGenRace();
         state = State.IDLE;
         gender = randGenGender();
@@ -33,7 +34,16 @@ public class Pet implements Serializable {
         stage = calcLifeStage(age);
         alive = true;
     }
-
+    public static Pet getInstance() {
+        if (instance == null) {
+            synchronized (Pet.class) {
+                if (instance == null) {
+                    instance = new Pet();
+                }
+            }
+        }
+        return instance;
+    }
     private static Race randGenRace() {
         Race[] races = Race.values();
         Random random = new Random();
