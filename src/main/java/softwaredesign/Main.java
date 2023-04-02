@@ -314,6 +314,7 @@ public class Main extends GameApplication {
         return ui;
     }
 
+
     //***************************** FOOD UI UTILS *****************************
     void foodButtonHoverEffect(Button button, Food food, HBox topBar){
         Node balanceDisplay = topBar.getChildren().get(0);
