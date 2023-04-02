@@ -33,7 +33,7 @@ public class MainUI extends BaseUI {
 
         //BOTTOM BUTTONS
         Button button5 = createIconButton("knife-and-fork.png", getBottomBar());
-        Button button6 = createIconButton("games.png", getBottomBar());
+        Button rpsButton = createIconButton("games.png", getBottomBar());
         Button button7 = createIconButton("sleep.png", getBottomBar());
         Button button8 = createIconButton("shower.png", getBottomBar());
 
@@ -90,6 +90,13 @@ public class MainUI extends BaseUI {
             @Override
             public void handle(ActionEvent event) {
                 FXGL.getGameScene().addUINode(new FoodUI(getClockBar()));
+            }
+        });
+
+        rpsButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Main.showRPSUI(getClockBar());
             }
         });
 

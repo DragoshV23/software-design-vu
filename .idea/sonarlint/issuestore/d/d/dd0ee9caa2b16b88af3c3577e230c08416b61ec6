@@ -1,26 +1,0 @@
-
-C
-java:S16042"(Make this anonymous inner class a lambda(“†ú±øÿÿÿÿ
-C
-java:S1604C"(Make this anonymous inner class a lambda(‚˜éêüÿÿÿÿ
-C
-java:S1604J"(Make this anonymous inner class a lambda(Û¨­àøÿÿÿÿ
->
-java:S1604Q"(Make this anonymous inner class a lambda(Ó‚ƒ¼
-=
-java:S1604Y"(Make this anonymous inner class a lambda(ä¬ï
-C
-java:S1604`"(Make this anonymous inner class a lambda(œÓšœüÿÿÿÿ
-Q	java:S110"<This class has 7 parents which is greater than 5 authorized.(òêÕ¨
-V
-java:S1854$";Remove this useless assignment to local variable "button6".(ÿşïãÿÿÿÿÿ
-P
-java:S1854";Remove this useless assignment to local variable "button1".(Ê«¶
-A
-java:S1481",Remove this unused "button1" local variable.(Ê«¶
-G
-java:S1481$",Remove this unused "button6" local variable.(ÿşïãÿÿÿÿÿ
-—
-java:S1186L"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¬ÆË«
-G
-java:S1602e",Remove useless curly braces around statement(¦§‘€ûÿÿÿÿ

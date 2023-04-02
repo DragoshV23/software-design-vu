@@ -34,10 +34,16 @@ public class Main extends GameApplication {
     }
     // Create pet
     static Pet pet = Pet.getInstance();
+    static User user = User.getInstance();
     public static void animatePet() {
         petEntity.getComponent(AnimationComponent.class).setAnim(pet);
     }
     static Entity petEntity;
+
+    public static void showRPSUI(HBox clockBar) {
+        RPSUI rpsUI = new RPSUI(clockBar, pet, user);
+        FXGL.getGameScene().addUINode(rpsUI);
+    }
 
     public static void save() {
         try {

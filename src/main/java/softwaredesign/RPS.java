@@ -13,6 +13,7 @@ public class RPS extends MiniGame{
         this.petChoice = randGenChoice();
     }
     public Outcome calculateOutcome() {
+        this.petChoice = randGenChoice();
         // outcome draw
         if (userChoice == petChoice) {
             return Outcome.DRAW;
