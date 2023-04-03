@@ -1,5 +1,6 @@
 package softwaredesign;
 
+import com.almasb.fxgl.dsl.FXGL;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -35,6 +36,7 @@ public class RPSUI extends BaseUI {
             @Override
             public void handle(ActionEvent event) {
                 play(Choice.ROCK);
+                displayReturnButton();
             }
         });
 
@@ -42,6 +44,7 @@ public class RPSUI extends BaseUI {
             @Override
             public void handle(ActionEvent event) {
                 play(Choice.PAPER);
+                displayReturnButton();
             }
         });
 
@@ -49,6 +52,18 @@ public class RPSUI extends BaseUI {
             @Override
             public void handle(ActionEvent event) {
                 play(Choice.SCISSORS);
+                displayReturnButton();
+            }
+        });
+    }
+
+    private void displayReturnButton() {
+        getBottomBar().getChildren().clear();
+        Button goBackButton = createIconButton("back.png", getBottomBar());
+        goBackButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FXGL.getGameScene().addUINode(new MainUI(getClockBar()));
             }
         });
     }
