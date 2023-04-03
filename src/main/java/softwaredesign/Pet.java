@@ -30,7 +30,7 @@ public class Pet implements Serializable {
         energy = 100;
         mood = 100;
         hunger = 100;
-        age = 0;
+        age = -1;
         stage = calcLifeStage(age);
         alive = true;
     }
