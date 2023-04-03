@@ -78,8 +78,17 @@ public class BackgroundUI extends BaseUI {
         Button button = createIconButton(iconPath, getTopBar());
         backgroundButtonHoverEffect(button, background);
         button.setOnAction(event -> {
-            user.setActiveBackground(background.getName());
-            FXGL.getGameScene().addUINode(new MainUI(getClockBar()));
+            if (user.pay(background)) {
+                user.setActiveBackground(background.getName());
+                FXGL.getGameScene().addUINode(new MainUI(getClockBar()));
+            }
+            getBottomBar().getChildren().clear();
+            String noMoneyMessage = "Not enough balance!";
+            Label label = new Label(noMoneyMessage);
+
+            label.setTextFill(Color.WHITE);
+            label.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 20));
+            getBottomBar().getChildren().add(label);
         });
     }
 

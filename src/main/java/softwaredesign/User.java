@@ -23,8 +23,8 @@ public class User implements Serializable {
         return instance;
     }
 
-    public boolean pay(Food food) {
-        if (this.balance >= food.getPrice()) {this.balance -= food.getPrice(); return true;}
+    public boolean pay(Item item) {
+        if (this.balance >= item.getPrice()) {this.balance -= item.getPrice(); return true;}
         else {return false; }
     }
 
@@ -33,7 +33,6 @@ public class User implements Serializable {
     }
     public int getBalance(){return balance; }
 
-    public Boolean buy(Item item){return false; }
     public String getActiveBackground() {return this.activeBackground; }
     public void setActiveBackground(String background) {this.activeBackground = background; }
     public void playMiniGame(MiniGame minigame){}
