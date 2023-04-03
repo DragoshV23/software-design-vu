@@ -37,6 +37,7 @@ public class Main extends GameApplication {
     // Create pet
     static Pet pet = Pet.getInstance();
     static User user = User.getInstance();
+    private HBox clock = createClock();
 
     public static UiFactory uiFactory = new UiFactory();
     public static void animatePet() {
@@ -88,7 +89,7 @@ public class Main extends GameApplication {
         loadOrCreatePet();
         Background defaultBackground = new Background("Default", 0, "white.png");
         user.setActiveBackground(defaultBackground);
-        reducePetStats(Duration.seconds(6));
+        reducePetStats(Duration.seconds(6), clock);
     }
 
     private void loadOrCreatePet() {
@@ -132,13 +133,14 @@ public class Main extends GameApplication {
         }
     }
 
-    private void reducePetStats(Duration interval) {
+    private void reducePetStats(Duration interval, HBox clockBar) {
         getGameTimer().runAtInterval(() -> {
             if (pet.getStage() != LifeStage.EGG) {
                 pet.hungry();
                 pet.tired();
                 pet.bored();
                 pet.dirty();
+                checkIfDead(clockBar);
             }
         }, interval);
     }
@@ -148,10 +150,9 @@ public class Main extends GameApplication {
 
     @Override
     protected void initUI() {
-        HBox clockBar = createClock();
 
         // Add the UI to the game scene
-        FXGL.getGameScene().addUINode(uiFactory.getUi("MAIN", clockBar));
+        FXGL.getGameScene().addUINode(uiFactory.getUi("MAIN", clock));
     }
     public static HBox createClock() {
         // Creating clock

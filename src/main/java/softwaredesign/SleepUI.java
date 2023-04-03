@@ -42,7 +42,8 @@ public class SleepUI extends BaseUI {
                 }
                 pet.wake();
                 Main.animatePet();
-                FXGL.getGameScene().addUINode(new MainUI(getClockBar()));
+                FXGL.getGameScene().addUINode(Main.uiFactory.getUi("MAIN", getClockBar()));
+                Main.checkIfDead(getClockBar());
             }
         });
 

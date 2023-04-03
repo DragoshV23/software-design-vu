@@ -95,7 +95,6 @@ public class Pet implements Serializable {
         } else {
             this.mood = 100;
         }
-
     }
 
     public void improveMood() {
@@ -134,6 +133,7 @@ public class Pet implements Serializable {
     }
 
     public void die() {
+        this.alive = false;
         this.state = State.DEAD;
     }
 
