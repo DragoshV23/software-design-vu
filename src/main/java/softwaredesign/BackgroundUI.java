@@ -64,7 +64,7 @@ public class BackgroundUI extends BaseUI {
         });
 
         button.setOnMouseExited(event -> {
-            FXGL.getGameScene().setBackgroundColor(Color.WHITE);
+            FXGL.getGameScene().setBackgroundRepeat(user.getActiveBackground().getBackgroundImage());
             getBottomBar().getChildren().clear();
             getBottomBar().getChildren().add(balanceDisplay);
         });
@@ -74,7 +74,7 @@ public class BackgroundUI extends BaseUI {
         Button button = createIconButton(iconPath, getTopBar());
         backgroundButtonHoverEffect(button, background);
         button.setOnAction(event -> {
-            FXGL.getGameScene().setBackgroundRepeat(background.getBackgroundImage());
+            user.setActiveBackground(background);
             FXGL.getGameScene().addUINode(new MainUI(getClockBar()));
         });
     }

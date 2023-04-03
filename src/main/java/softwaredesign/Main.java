@@ -82,6 +82,8 @@ public class Main extends GameApplication {
     @Override
     protected void initGame() {
         loadOrCreatePet();
+        Background defaultBackground = new Background("Default", 0, "white.png");
+        user.setActiveBackground(defaultBackground);
         reducePetStats(Duration.seconds(6));
     }
 
