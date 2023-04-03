@@ -199,9 +199,6 @@ public class Main extends GameApplication {
     }
 
     @Override
-    protected  void initInput() {}
-
-    @Override
     protected void initUI() {
         User user = User.getInstance();
         HBox clockBar = createClock();
@@ -209,8 +206,14 @@ public class Main extends GameApplication {
         System.out.println(user.getActiveBackground());
         FXGL.getGameScene().setBackgroundRepeat(backgroundFactory.getBackground(user.getActiveBackground()).getBackgroundImage());
 
+        File f = new File("saveFile.txt");
+        if(f.exists() && !f.isDirectory()) {
+            FXGL.getGameScene().addUINode(uiFactory.getUi("MAIN", clockBar));
+        } else {
+            FXGL.getGameScene().addUINode(uiFactory.getUi("EGG", clockBar));
+        }
         // Add the UI to the game scene
-        FXGL.getGameScene().addUINode(uiFactory.getUi("EGG", clockBar));
+
     }
     public static HBox createClock() {
         // Creating clock
