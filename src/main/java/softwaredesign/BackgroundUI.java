@@ -20,9 +20,13 @@ public class BackgroundUI extends BaseUI {
         super(clockBar);
         this.user = User.getInstance();
 
-        Background retroBackground = new Background("retro", 50, "ogbg.png");
+        Background retroBackground = new Background("1996 Tamagotchi", 50, "ogbg.png");
+        Background gameboyBackground = new Background("Gameboy", 25, "gameboy.png");
+        Background vuBackground = new Background("VU \"NU\" Building", 100, "VU.png");
         ArrayList<Item> stock = new ArrayList<>();
+        stock.add(gameboyBackground);
         stock.add(retroBackground);
+        stock.add(vuBackground);
         this.backgroundShop = new Shop("Background Shop", stock);
 
         addAdditionalComponents();
@@ -47,7 +51,9 @@ public class BackgroundUI extends BaseUI {
             }
         });
 
-        addBackgroundButton("ogbg.png", (Background) backgroundShop.getStock().get(0));
+        addBackgroundButton("gameboyIcon.png", (Background) backgroundShop.getStock().get(0));
+        addBackgroundButton("tamagotchiIcon.png", (Background) backgroundShop.getStock().get(1));
+        addBackgroundButton("VU-logo.png", (Background) backgroundShop.getStock().get(2));
     }
 
     void backgroundButtonHoverEffect(Button button, Background background) {
