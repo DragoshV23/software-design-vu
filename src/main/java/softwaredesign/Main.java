@@ -37,8 +37,7 @@ public class Main extends GameApplication {
     // Create pet
     static Pet pet = Pet.getInstance();
     static User user = User.getInstance();
-    private HBox clock = createClock();
-
+    public HBox clock;
     public static UiFactory uiFactory = new UiFactory();
     public static void animatePet() {
         petEntity.getComponent(AnimationComponent.class).setAnim(pet);
@@ -89,6 +88,7 @@ public class Main extends GameApplication {
         loadOrCreatePet();
         Background defaultBackground = new Background("Default", 0, "white.png");
         user.setActiveBackground(defaultBackground);
+        clock = createClock();
         reducePetStats(Duration.seconds(6), clock);
     }
 
@@ -150,9 +150,10 @@ public class Main extends GameApplication {
 
     @Override
     protected void initUI() {
+        HBox clockBar = createClock();
 
         // Add the UI to the game scene
-        FXGL.getGameScene().addUINode(uiFactory.getUi("MAIN", clock));
+        FXGL.getGameScene().addUINode(uiFactory.getUi("MAIN", clockBar));
     }
     public static HBox createClock() {
         // Creating clock
@@ -190,8 +191,7 @@ public class Main extends GameApplication {
             animatePet();
             FXGL.getGameScene().addUINode(uiFactory.getUi("DEAD", clockBar));
             deleteSaveFile();
-
-        } else {FXGL.getGameScene().addUINode(uiFactory.getUi("MAIN", clockBar)); }
+        }
     }
 
     public static void deleteSaveFile() {File f = new File("saveFile.txt"); f.delete();}

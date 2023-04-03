@@ -48,7 +48,8 @@ public class Pet implements Serializable {
         Race[] races = Race.values();
         Random random = new Random();
         int randomIndex = random.nextInt(races.length);
-        return races[randomIndex];
+        if (races[randomIndex] != Race.ALL) { return races[randomIndex]; }
+        else {return randGenRace(); }
     }
     private static Gender randGenGender() {
         Gender[] gender = Gender.values();
