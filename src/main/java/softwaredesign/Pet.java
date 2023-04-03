@@ -158,13 +158,15 @@ public class Pet implements Serializable {
 
     public int getHunger() {return hunger; }
 
-    private void setStage(LifeStage stage) {this.stage = stage; }
+    private void setStage(LifeStage stage) { this.stage = stage; }
 
     public void setAge(int age) { this.age = age; }
 
     public void setName(String name) { this.name = name; }
 
     public void setMood(int boost) { this.mood = boost; }
+
+    public void setEnergy(int energy) { this.energy = energy; }
 
     public void setHunger(int boost) { this.hunger = boost; }
 

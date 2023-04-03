@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class FoodUI extends BaseUI {
     private Pet pet;
@@ -44,7 +45,7 @@ public class FoodUI extends BaseUI {
         Label balanceLabel = new Label(balanceString);
 
         balanceLabel.setTextFill(Color.WHITE);
-        balanceLabel.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 20));
+        balanceLabel.setFont(Font.loadFont(Objects.requireNonNull(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf")).toExternalForm(), 20));
         getTopBar().getChildren().add(balanceLabel);
 
         //go back button

@@ -44,12 +44,6 @@ public class Main extends GameApplication {
     }
     static Entity petEntity;
 
-    public static void showRPSUI(HBox clockBar) {
-        Pet pet = Pet.getInstance();
-        RPSUI rpsUI = new RPSUI(clockBar, pet, user);
-        FXGL.getGameScene().addUINode(rpsUI);
-    }
-
     public static void save() {
         Pet pet = Pet.getInstance();
         try {

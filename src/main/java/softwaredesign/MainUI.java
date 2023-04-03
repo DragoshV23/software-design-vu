@@ -26,16 +26,16 @@ public class MainUI extends BaseUI {
         // Add additional components and their functionalities here
 
         //TOP BUTTONS
-        Button button1 = createIconButton("shopping-cart.png", getTopBar());
-        Button button2 = createIconButton("graph.png", getTopBar());
-        Button button3 = createIconButton("resetClock.png", getTopBar());
-        Button button4 = createIconButton("diskette.png", getTopBar());
+        Button shopButton = createIconButton("shopping-cart.png", getTopBar());
+        Button statsButton = createIconButton("graph.png", getTopBar());
+        Button resetClockButton = createIconButton("resetClock.png", getTopBar());
+        Button saveButton = createIconButton("diskette.png", getTopBar());
 
         //BOTTOM BUTTONS
-        Button button5 = createIconButton("knife-and-fork.png", getBottomBar());
+        Button foodButton = createIconButton("knife-and-fork.png", getBottomBar());
         Button rpsButton = createIconButton("games.png", getBottomBar());
-        Button button7 = createIconButton("sleep.png", getBottomBar());
-        Button button8 = createIconButton("shower.png", getBottomBar());
+        Button sleepButton = createIconButton("sleep.png", getBottomBar());
+        Button showerButton = createIconButton("shower.png", getBottomBar());
 
         //Popup
         Popup popup = new Popup();
@@ -47,14 +47,14 @@ public class MainUI extends BaseUI {
         popupLabel.setPadding(new Insets(20));
         popup.getContent().add(popupLabel);
 
-        button1.setOnAction(new EventHandler<ActionEvent>() {
+        shopButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 FXGL.getGameScene().addUINode(Main.uiFactory.getUi("BACKGROUND", getClockBar()));
             }
         });
 
-        button2.setOnAction(new EventHandler<ActionEvent>() {
+        statsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(!popup.isShowing()){
@@ -71,14 +71,14 @@ public class MainUI extends BaseUI {
             }
         });
 
-        button8.setOnAction(new EventHandler<ActionEvent>() {
+        showerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 pet.setHealth(100);
             }
         });
 
-        button3.setOnAction(new EventHandler<ActionEvent>() {
+        resetClockButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 HBox newClockBar = Main.createClock();
@@ -86,7 +86,7 @@ public class MainUI extends BaseUI {
             }
         });
         // save/creates saveFile.txt
-        button4.setOnAction(new EventHandler<ActionEvent>() {
+        saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if (pet.getStage() != LifeStage.EGG)
@@ -95,7 +95,7 @@ public class MainUI extends BaseUI {
             }
         });
 
-        button5.setOnAction(new EventHandler<ActionEvent>() {
+        foodButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 FXGL.getGameScene().addUINode(Main.uiFactory.getUi("FOOD", getClockBar()));
@@ -105,11 +105,11 @@ public class MainUI extends BaseUI {
         rpsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Main.showRPSUI(getClockBar());
+                FXGL.getGameScene().addUINode(new RPSUI(getClockBar()));
             }
         });
 
-        button7.setOnAction(new EventHandler<ActionEvent>() {
+        sleepButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 pet.sleep();
