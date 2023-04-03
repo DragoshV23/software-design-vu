@@ -90,10 +90,10 @@ public class RPSUI extends BaseUI {
                 // User gets nothing if they lose, or maybe -5?
                 break;
         }
-        updateMessageLabel(userChoice, rpsGame.getPetChoice(), outcome, reward);
+        updateMessageLabel(rpsGame.getPetChoice(), outcome, reward);
     }
 
-    private void updateMessageLabel(Choice userChoice, Choice petChoice, Outcome outcome, int reward) {
+    private void updateMessageLabel(Choice petChoice, Outcome outcome, int reward) {
         String outcomeMessage = "";
         switch (outcome) {
             case DRAW:
