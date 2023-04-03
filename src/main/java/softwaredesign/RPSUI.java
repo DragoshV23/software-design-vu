@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
+import java.util.Objects;
+
 public class RPSUI extends BaseUI {
     private final RPS rpsGame;
     private final Label outcomeLabel;
@@ -24,7 +26,7 @@ public class RPSUI extends BaseUI {
         this.user = User.getInstance();
 
         outcomeLabel = new Label("");
-        outcomeLabel.setFont(new Font("Arial", 20));
+        outcomeLabel.setFont(Font.loadFont(Objects.requireNonNull(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf")).toExternalForm(), 15));
         outcomeLabel.setStyle("-fx-text-fill: white;");
         getTopBar().getChildren().add(outcomeLabel);
 
@@ -102,7 +104,7 @@ public class RPSUI extends BaseUI {
                 break;
         }
         String rewardMessage = outcome == Outcome.LOSE ? "You get no money." : "You get $" + reward + ".";
-        outcomeLabel.setText(pet.getName() + " chose " + petChoice + ". " + rewardMessage + " " + "\n" + outcomeMessage +
+        outcomeLabel.setText(pet.getName() + " chose " + petChoice + ". " + "\n" + rewardMessage + " " + outcomeMessage +
                             "\n" + pet.getName() + " enjoyed the game!");
     }
 }
