@@ -50,7 +50,7 @@ public class MainUI extends BaseUI {
         button1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXGL.getGameScene().addUINode(new BackgroundUI(getClockBar()));
+                FXGL.getGameScene().addUINode(Main.uiFactory.getUi("BACKGROUND", getClockBar()));
             }
         });
 
@@ -96,7 +96,7 @@ public class MainUI extends BaseUI {
         button5.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXGL.getGameScene().addUINode(new FoodUI(getClockBar()));
+                FXGL.getGameScene().addUINode(Main.uiFactory.getUi("FOOD", getClockBar()));
             }
         });
 
@@ -115,7 +115,7 @@ public class MainUI extends BaseUI {
                 getGameTimer().runAtInterval(() -> {
                     pet.sleep();
                 }, Duration.seconds(10));
-                 FXGL.getGameScene().addUINode(new SleepUI(getClockBar()));
+                 FXGL.getGameScene().addUINode(Main.uiFactory.getUi("SLEEP", getClockBar()));
             }
         });
 

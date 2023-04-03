@@ -5,6 +5,7 @@ import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.profile.DataFile;
+import com.fasterxml.jackson.databind.ser.VirtualBeanPropertyWriter;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import java.io.*;
 import java.time.LocalTime;
@@ -35,6 +37,8 @@ public class Main extends GameApplication {
     // Create pet
     static Pet pet = Pet.getInstance();
     static User user = User.getInstance();
+
+    public static UiFactory uiFactory = new UiFactory();
     public static void animatePet() {
         petEntity.getComponent(AnimationComponent.class).setAnim(pet);
     }
@@ -172,19 +176,18 @@ public class Main extends GameApplication {
         timeline.play();
 
         clockBar.getChildren().add(timerLabel);
-
         // Add the UI to the game scene
-        FXGL.getGameScene().addUINode(new MainUI(clockBar));
+        FXGL.getGameScene().addUINode(uiFactory.getUi("MAIN", clockBar));
     }
 
     static void checkIfDead(HBox clockBar){
         if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
             pet.die();
             animatePet();
-            FXGL.getGameScene().addUINode(new DeadUI(clockBar));
+            FXGL.getGameScene().addUINode(uiFactory.getUi("DEAD", clockBar));
             deleteSaveFile();
 
-        } else {FXGL.getGameScene().addUINode(new MainUI(clockBar)); }
+        } else {FXGL.getGameScene().addUINode(uiFactory.getUi("MAIN", clockBar)); }
     }
 
     public static void deleteSaveFile() {File f = new File("saveFile.txt"); f.delete();}
