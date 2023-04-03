@@ -75,13 +75,16 @@ public class RPSUI extends BaseUI {
         Outcome outcome = rpsGame.calculateOutcome();
 
         pet.improveMood(); // Pet's mood is increased no matter the outcome
+        pet.tired();       // Pet's energy goes down by 10 for each round
 
         switch (outcome) {
             case DRAW:
-                user.setBalance(user.getBalance() + 5);
+                reward = 5;
+                user.setBalance(user.getBalance() + reward);
                 break;
             case WIN:
-                user.setBalance(user.getBalance() + 15);
+                reward = 15;
+                user.setBalance(user.getBalance() + reward);
                 break;
             case LOSE:
                 // User gets nothing if they lose, or maybe -5?
@@ -103,7 +106,7 @@ public class RPSUI extends BaseUI {
                 outcomeMessage = "You lose!";
                 break;
         }
-        String rewardMessage = outcome == Outcome.LOSE ? "You get no money." : "You get $" + reward + ".";
+        String rewardMessage = (outcome == Outcome.LOSE) ? "You get no money." : "You get $" + reward + ".";
         outcomeLabel.setText(pet.getName() + " chose " + petChoice + ". " + "\n" + rewardMessage + " " + outcomeMessage +
                             "\n" + pet.getName() + " enjoyed the game!");
     }
