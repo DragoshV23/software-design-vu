@@ -67,10 +67,12 @@ public class FoodUI extends BaseUI {
         Node balanceDisplay = getTopBar().getChildren().get(0);
         button.setOnMouseEntered(event -> {
                 getTopBar().getChildren().clear();
-                Label foodProperty = new Label(food.getLabel());
 
+                //Set food label + style
+                Label foodProperty = new Label(food.getLabel());
                 foodProperty.setTextFill(Color.WHITE);
                 foodProperty.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 20));
+
                 getTopBar().getChildren().add(foodProperty);
         });
 
@@ -92,13 +94,10 @@ public class FoodUI extends BaseUI {
                 getTopBar().getChildren().clear();
                 String errorMessage = "You don't have enough money!";
 
+                //Set error message + style
                 Label errorMessageLabel = new Label(errorMessage);
                 errorMessageLabel.setTextFill(Color.WHITE);
                 errorMessageLabel.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 15));
-
-                Label foodLabel = new Label (food.getLabel());
-                foodLabel.setTextFill(Color.WHITE);
-                foodLabel.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 20));
 
                 getTopBar().getChildren().add(errorMessageLabel);
 
@@ -107,7 +106,6 @@ public class FoodUI extends BaseUI {
                 pause.setOnFinished(e -> {
                     // Remove error message
                     getTopBar().getChildren().remove(errorMessageLabel);
-                    getTopBar().getChildren().add(foodLabel);
                 });
                 pause.play();
             }
