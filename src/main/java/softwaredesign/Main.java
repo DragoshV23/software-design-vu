@@ -123,6 +123,7 @@ public class Main extends GameApplication {
         clock = createClock();
         loadOrCreatePetEntity(clock);
         reducePetStats(Duration.seconds(6), clock);
+        agePet();
     }
 
     private static Pet loadOrCreatePet() {
@@ -186,9 +187,10 @@ public class Main extends GameApplication {
     }
 
     static void reducePetStats(Duration interval, HBox clockBar) {
-        Pet pet = Pet.getInstance();
         getGameTimer().runAtInterval(() -> {
-            if (pet.getStage() != LifeStage.EGG) {
+            Pet pet = Pet.getInstance();
+            if (pet.getStage() != LifeStage.EGG && (pet.getState() != State.SLEEP && pet.getState() != State.DEAD)) {
+                System.out.println("yo");
                 pet.hungry();
                 pet.tired();
                 pet.bored();
@@ -202,6 +204,25 @@ public class Main extends GameApplication {
                 checkIfDead(clockBar);
             }
         }, interval);
+    }
+    static void agePet() {
+        Pet pet = Pet.getInstance();
+        getGameTimer().runAtInterval(() -> {
+            if (pet.getStage() != LifeStage.EGG && pet.getState() != State.DEAD) {
+                pet.addSecondsAlive();
+            }
+            if ((pet.getState() == State.IDLE && pet.getStage() != LifeStage.EGG) || pet.getState() == State.ANGRY) {
+                if(pet.getState() != State.DEAD) {
+                    if (pet.getSecondsAlive() % 10 == 0) {
+                        pet.birthday();
+                        pet.birthday();
+                        pet.birthday();
+                        pet.birthday();
+                        animatePet();
+                    }
+                }
+            }
+        }, Duration.seconds(1));
     }
 
     @Override
@@ -259,10 +280,9 @@ public class Main extends GameApplication {
             FXGL.getGameScene().addUINode(uiFactory.getUi("DEAD", clockBar));
             deleteSaveFile();
             saveUser();
-        } else if (pet.getHealth() <= 50 || pet.getEnergy() <= 50 || pet.getMood() <= 50 || pet.getHunger() <= 50) {
+        } else if (pet.getHealth() < 50 || pet.getEnergy() < 50 || pet.getMood() < 50 || pet.getHunger() < 50) {
             pet.angry();
             animatePet();
-
         }
     }
 

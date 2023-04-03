@@ -20,6 +20,7 @@ public class Pet implements Serializable {
     private int mood;
     private int hunger;
     private int age;
+    private int secondsAlive;
     private boolean alive;
 
     private Pet() {
@@ -30,6 +31,7 @@ public class Pet implements Serializable {
         energy = 100;
         mood = 100;
         hunger = 100;
+        secondsAlive = 0;
         age = -1;
         stage = calcLifeStage(age);
         alive = true;
@@ -88,9 +90,15 @@ public class Pet implements Serializable {
         }
 
     }
+    public void addSecondsAlive() {this.secondsAlive += 1;}
+    public int getSecondsAlive() {return this.secondsAlive;}
 
     public void wake() {
-        this.state = State.IDLE; // TODO: check if every stat above 50 else angry
+        if (this.hunger > 49 && this.mood > 49 && this.health > 49 && this.energy > 49) {
+            this.state = State.IDLE;
+        } else {
+            angry();
+        }
         hungry();
         hungry();
         dirty();

@@ -63,7 +63,8 @@ public class MainUI extends BaseUI {
                             "\nMood: " + pet.getMood() +
                             "\nHealth: " + pet.getHealth() +
                             "\nHunger: " + pet.getHunger() +
-                            "\nEnergy: " + pet.getEnergy());
+                            "\nEnergy: " + pet.getEnergy()+
+                            "\nAge: " + pet.getAge());
                     popup.show(FXGL.getPrimaryStage());
                 }
                 else{
