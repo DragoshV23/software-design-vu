@@ -120,8 +120,8 @@ public class Main extends GameApplication {
 
     @Override
     protected void initGame() {
-        loadOrCreatePetEntity();
         clock = createClock();
+        loadOrCreatePetEntity(clock);
         reducePetStats(Duration.seconds(6), clock);
     }
 
@@ -142,7 +142,7 @@ public class Main extends GameApplication {
         }
     }
 
-    private static void loadOrCreatePetEntity() {
+    private static void loadOrCreatePetEntity(HBox clock) {
         File f = new File("saveFile.txt");
         if(f.exists() && !f.isDirectory()) {
             Pet pet = loadPet();
@@ -180,6 +180,7 @@ public class Main extends GameApplication {
                 // Check if user entered a name and set the pet's name
                 pet.birthday();
                 petEntity.getComponent(AnimationComponent.class).setAnim(pet);
+                FXGL.getGameScene().addUINode(uiFactory.getUi("MAIN", clock));
             }, Duration.seconds(10));
         }
     }
@@ -209,7 +210,7 @@ public class Main extends GameApplication {
         FXGL.getGameScene().setBackgroundRepeat(backgroundFactory.getBackground(user.getActiveBackground()).getBackgroundImage());
 
         // Add the UI to the game scene
-        FXGL.getGameScene().addUINode(uiFactory.getUi("MAIN", clockBar));
+        FXGL.getGameScene().addUINode(uiFactory.getUi("EGG", clockBar));
     }
     public static HBox createClock() {
         // Creating clock

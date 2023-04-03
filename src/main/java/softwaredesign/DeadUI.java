@@ -24,7 +24,7 @@ public class DeadUI extends BaseUI {
     private void addAdditionalComponents() {
         String deadMessage = pet.getName() + " " + checkCauseDead();
         Label label = new Label(deadMessage);
-        String restartMessage = "close game to restart with new pet";
+        String restartMessage = "close game to restart \nwith new pet";
         Label label2 = new Label(restartMessage);
 
         label.setTextFill(Color.WHITE);
