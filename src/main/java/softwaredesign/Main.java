@@ -190,7 +190,6 @@ public class Main extends GameApplication {
         getGameTimer().runAtInterval(() -> {
             Pet pet = Pet.getInstance();
             if (pet.getStage() != LifeStage.EGG && (pet.getState() != State.SLEEP && pet.getState() != State.DEAD)) {
-                System.out.println("yo");
                 pet.hungry();
                 pet.tired();
                 pet.bored();
