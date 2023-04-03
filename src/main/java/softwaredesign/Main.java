@@ -34,22 +34,24 @@ public class Main extends GameApplication {
         settings.setHeight(37 * 16);
         settings.setWidth(32 * 16);
     }
-    // Create pet
-    static Pet pet = Pet.getInstance();
+    Pet pet = loadOrCreatePet(); // ensures singleton object instance is only 1 and loaded
     static User user = User.getInstance();
     public HBox clock;
     public static UiFactory uiFactory = new UiFactory();
     public static void animatePet() {
+        Pet pet = Pet.getInstance();
         petEntity.getComponent(AnimationComponent.class).setAnim(pet);
     }
     static Entity petEntity;
 
     public static void showRPSUI(HBox clockBar) {
+        Pet pet = Pet.getInstance();
         RPSUI rpsUI = new RPSUI(clockBar, pet, user);
         FXGL.getGameScene().addUINode(rpsUI);
     }
 
     public static void save() {
+        Pet pet = Pet.getInstance();
         try {
             FileOutputStream f = new FileOutputStream(new File("saveFile.txt"));
             ObjectOutputStream o = new ObjectOutputStream(f);
@@ -63,15 +65,17 @@ public class Main extends GameApplication {
         }
     }
 
-    private void load() {
+    private static Pet loadPet() {
         try {
+            Pet petLoad = Pet.getInstance();
             FileInputStream f = new FileInputStream(new File("saveFile.txt"));
             ObjectInputStream o = new ObjectInputStream(f);
 
-            Pet petLoad = (Pet) o.readObject();
-            pet = petLoad;
+            Pet.instance = (Pet) o.readObject();
             f.close();
             o.close();
+
+            return petLoad;
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
@@ -81,27 +85,38 @@ public class Main extends GameApplication {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override
     protected void initGame() {
-        loadOrCreatePet();
+        loadOrCreatePetEntity();
         Background defaultBackground = new Background("Default", 0, "white.png");
         user.setActiveBackground(defaultBackground);
         clock = createClock();
         reducePetStats(Duration.seconds(6), clock);
     }
 
-    private void loadOrCreatePet() {
+    private static Pet loadOrCreatePet() {
         File f = new File("saveFile.txt");
         if(f.exists() && !f.isDirectory()) {
-            load();
+            return loadPet();
+        } else {
+            return Pet.getInstance();
+        }
+    }
+
+    private static void loadOrCreatePetEntity() {
+        File f = new File("saveFile.txt");
+        if(f.exists() && !f.isDirectory()) {
+            Pet pet = loadPet();
             // Spawn pet
             petEntity = FXGL.entityBuilder()
                     .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 4)
                     .with(new AnimationComponent(pet))
                     .buildAndAttach();
         } else {
+            Pet pet = Pet.getInstance();
             // Spawn pet
             petEntity = FXGL.entityBuilder()
                     .at((32 * 8) - 16 * 8, (37 * 8) - 16 * 4)
@@ -133,7 +148,8 @@ public class Main extends GameApplication {
         }
     }
 
-    private void reducePetStats(Duration interval, HBox clockBar) {
+    static void reducePetStats(Duration interval, HBox clockBar) {
+        Pet pet = Pet.getInstance();
         getGameTimer().runAtInterval(() -> {
             if (pet.getStage() != LifeStage.EGG) {
                 pet.hungry();
@@ -186,6 +202,7 @@ public class Main extends GameApplication {
     }
 
     static void checkIfDead(HBox clockBar){
+        Pet pet = Pet.getInstance();
         if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
             pet.die();
             animatePet();

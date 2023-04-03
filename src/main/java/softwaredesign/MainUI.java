@@ -90,6 +90,7 @@ public class MainUI extends BaseUI {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if (pet.getStage() != LifeStage.EGG)
+//                    System.out.println(pet.getAge());
                     Main.save();
             }
         });

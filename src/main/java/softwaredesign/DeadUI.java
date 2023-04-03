@@ -9,6 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
+
+import static softwaredesign.Main.uiFactory;
 
 public class DeadUI extends BaseUI {
     private Pet pet = Pet.getInstance();
@@ -19,20 +22,18 @@ public class DeadUI extends BaseUI {
         this.getChildren().add(ui);
     }
     private void addAdditionalComponents() {
-        Button resetButton = createIconButton("undo.png", getBottomBar());
         String deadMessage = pet.getName() + " " + checkCauseDead();
         Label label = new Label(deadMessage);
+        String restartMessage = "close game to restart with new pet";
+        Label label2 = new Label(restartMessage);
 
         label.setTextFill(Color.WHITE);
         label.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 15));
         getTopBar().getChildren().add(label);
 
-        resetButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Main.deleteSaveFile();
-            }
-        });
+        label2.setTextFill(Color.WHITE);
+        label2.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 15));
+        getBottomBar().getChildren().add(label2);
     }
      String checkCauseDead() {
         if (pet.getHealth() <= 0) {

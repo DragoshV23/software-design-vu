@@ -9,7 +9,7 @@ enum LifeStage { EGG, KID, ADULT }
 enum Gender {MALE, FEMALE}
 
 public class Pet implements Serializable {
-    private static volatile Pet instance;
+    static volatile Pet instance;
     private String name;
     private Race race;
     private LifeStage stage;
@@ -169,5 +169,4 @@ public class Pet implements Serializable {
     public void setHunger(int boost) { this.hunger = boost; }
 
     public void setHealth(int boost) { this.health = boost; }
-
 }
