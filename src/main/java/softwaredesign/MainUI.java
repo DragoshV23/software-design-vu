@@ -50,7 +50,7 @@ public class MainUI extends BaseUI {
         shopButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXGL.getGameScene().addUINode(new BackgroundUI(getClockBar()));
+                FXGL.getGameScene().addUINode(Main.uiFactory.getUi("BACKGROUND", getClockBar()));
             }
         });
 
@@ -81,7 +81,8 @@ public class MainUI extends BaseUI {
         resetClockButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
+                HBox newClockBar = Main.createClock();
+                FXGL.getGameScene().addUINode(Main.uiFactory.getUi("MAIN", newClockBar));
             }
         });
         // save/creates saveFile.txt
@@ -89,6 +90,7 @@ public class MainUI extends BaseUI {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if (pet.getStage() != LifeStage.EGG)
+//                    System.out.println(pet.getAge());
                     Main.save();
             }
         });
@@ -96,7 +98,7 @@ public class MainUI extends BaseUI {
         foodButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXGL.getGameScene().addUINode(new FoodUI(getClockBar()));
+                FXGL.getGameScene().addUINode(Main.uiFactory.getUi("FOOD", getClockBar()));
             }
         });
 
@@ -115,7 +117,7 @@ public class MainUI extends BaseUI {
                 getGameTimer().runAtInterval(() -> {
                     pet.sleep();
                 }, Duration.seconds(10));
-                 FXGL.getGameScene().addUINode(new SleepUI(getClockBar()));
+                 FXGL.getGameScene().addUINode(Main.uiFactory.getUi("SLEEP", getClockBar()));
             }
         });
 

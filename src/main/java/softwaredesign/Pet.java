@@ -9,7 +9,7 @@ enum LifeStage { EGG, KID, ADULT }
 enum Gender {MALE, FEMALE}
 
 public class Pet implements Serializable {
-    private static volatile Pet instance;
+    static volatile Pet instance;
     private String name;
     private Race race;
     private LifeStage stage;
@@ -23,14 +23,14 @@ public class Pet implements Serializable {
     private boolean alive;
 
     private Pet() {
-        race = Race.LLAMA; // randGenRace();
+        race = randGenRace();
         state = State.IDLE;
         gender = randGenGender();
         health = 100;
         energy = 100;
         mood = 100;
         hunger = 100;
-        age = 1;
+        age = -1;
         stage = calcLifeStage(age);
         alive = true;
     }
@@ -48,7 +48,8 @@ public class Pet implements Serializable {
         Race[] races = Race.values();
         Random random = new Random();
         int randomIndex = random.nextInt(races.length);
-        return races[randomIndex];
+        if (races[randomIndex] != Race.ALL) { return races[randomIndex]; }
+        else {return randGenRace(); }
     }
     private static Gender randGenGender() {
         Gender[] gender = Gender.values();
@@ -95,7 +96,6 @@ public class Pet implements Serializable {
         } else {
             this.mood = 100;
         }
-
     }
 
     public void improveMood() {
@@ -134,6 +134,7 @@ public class Pet implements Serializable {
     }
 
     public void die() {
+        this.alive = false;
         this.state = State.DEAD;
     }
 
@@ -170,5 +171,4 @@ public class Pet implements Serializable {
     public void setHunger(int boost) { this.hunger = boost; }
 
     public void setHealth(int boost) { this.health = boost; }
-
 }

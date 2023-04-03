@@ -1,8 +1,6 @@
 package softwaredesign;
 
-import com.almasb.fxgl.dsl.FXGL;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import static com.almasb.fxgl.dsl.FXGL.getAssetLoader;
 
