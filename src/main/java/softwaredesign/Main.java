@@ -193,6 +193,12 @@ public class Main extends GameApplication {
                 pet.tired();
                 pet.bored();
                 pet.dirty();
+                if (pet.getState() == State.ANGRY) {
+                    pet.hungry();
+                    pet.tired();
+                    pet.bored();
+                    pet.dirty();
+                }
                 checkIfDead(clockBar);
             }
         }, interval);
@@ -247,12 +253,16 @@ public class Main extends GameApplication {
 
     static void checkIfDead(HBox clockBar){
         Pet pet = Pet.getInstance();
-        if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0){
+        if(pet.getHealth() <= 0 || pet.getEnergy() <= 0 || pet.getMood() <= 0 || pet.getHunger() <= 0) {
             pet.die();
             animatePet();
             FXGL.getGameScene().addUINode(uiFactory.getUi("DEAD", clockBar));
             deleteSaveFile();
             saveUser();
+        } else if (pet.getHealth() <= 50 || pet.getEnergy() <= 50 || pet.getMood() <= 50 || pet.getHunger() <= 50) {
+            pet.angry();
+            animatePet();
+
         }
     }
 

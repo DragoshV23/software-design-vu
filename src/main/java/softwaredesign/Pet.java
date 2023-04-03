@@ -76,6 +76,9 @@ public class Pet implements Serializable {
         setAge(this.age + 1);
         setStage(calcLifeStage(this.age));
     }
+    public void angry() {
+        this.state = State.ANGRY;
+    }
     public void sleep() {
         this.state = State.SLEEP;
         if (energy < 95) {
