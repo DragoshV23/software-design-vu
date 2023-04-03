@@ -252,6 +252,7 @@ public class Main extends GameApplication {
             animatePet();
             FXGL.getGameScene().addUINode(uiFactory.getUi("DEAD", clockBar));
             deleteSaveFile();
+            saveUser();
         }
     }
 
