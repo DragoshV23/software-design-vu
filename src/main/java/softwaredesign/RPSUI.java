@@ -15,12 +15,12 @@ public class RPSUI extends BaseUI {
     private final User user;
     private int reward;
 
-    public RPSUI(HBox clockBar, Pet pet, User user) {
+    public RPSUI(HBox clockBar) {
         super(clockBar);
         rpsGame = new RPS();
 
-        this.pet = pet;
-        this.user = user;
+        this.pet = Pet.getInstance();
+        this.user = User.getInstance();
 
         outcomeLabel = new Label("");
         outcomeLabel.setFont(new Font("Arial", 20));
@@ -86,7 +86,8 @@ public class RPSUI extends BaseUI {
                 outcomeMessage = "You lose!";
                 break;
         }
-        String rewardMessage = outcome == Outcome.LOSE ? "You get no money." : "You get $" + reward + ", pet mood improved by 25!";
-        outcomeLabel.setText("You chose " + userChoice + ", pet chose " + petChoice + ". " + rewardMessage + " " + outcomeMessage);
+        String rewardMessage = outcome == Outcome.LOSE ? "You get no money." : "You get $" + reward + ".";
+        outcomeLabel.setText(pet.getName() + " chose " + petChoice + ". " + rewardMessage + " " + "\n" + outcomeMessage +
+                            "\n" + pet.getName() + " enjoyed the game!");
     }
 }

@@ -103,7 +103,7 @@ public class MainUI extends BaseUI {
         rpsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Main.showRPSUI(getClockBar());
+                FXGL.getGameScene().addUINode(new RPSUI(getClockBar()));
             }
         });
 
