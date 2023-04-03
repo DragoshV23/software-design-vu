@@ -2,13 +2,15 @@ package softwaredesign;
 
 import javafx.scene.image.Image;
 
-public class User {
-    private static volatile User instance;
+import java.io.Serializable;
+
+public class User implements Serializable {
+    static volatile User instance;
     private int balance;
-    private Background activeBackground;
+    private String activeBackground;
     public User() {
         this.balance = 0;
-        // asset loader from fxgl needed, thats why constructor does not initialize activeBackground
+        this.activeBackground = "Default";
     }
     public static User getInstance() {
         if (instance == null) {
@@ -32,7 +34,7 @@ public class User {
     public int getBalance(){return balance; }
 
     public Boolean buy(Item item){return false; }
-    public Background getActiveBackground() {return this.activeBackground; }
-    public void setActiveBackground(Background background) {this.activeBackground = background; }
+    public String getActiveBackground() {return this.activeBackground; }
+    public void setActiveBackground(String background) {this.activeBackground = background; }
     public void playMiniGame(MiniGame minigame){}
 }

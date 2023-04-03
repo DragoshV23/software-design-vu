@@ -89,9 +89,9 @@ public class MainUI extends BaseUI {
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                Main.saveUser();
                 if (pet.getStage() != LifeStage.EGG)
-//                    System.out.println(pet.getAge());
-                    Main.save();
+                    Main.savePet();
             }
         });
 

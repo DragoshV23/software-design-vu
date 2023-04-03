@@ -14,19 +14,17 @@ import javafx.scene.text.Font;
 import java.util.ArrayList;
 
 public class BackgroundUI extends BaseUI {
+    BackgroundFactory backgroundFactory = new BackgroundFactory();
     private User user;
     private Shop backgroundShop;
     public BackgroundUI(HBox clockBar) {
         super(clockBar);
         this.user = User.getInstance();
 
-        Background retroBackground = new Background("1996 Tamagotchi", 50, "ogbg.png");
-        Background gameboyBackground = new Background("Gameboy", 25, "gameboy.png");
-        Background vuBackground = new Background("VU \"NU\" Building", 100, "VU.png");
         ArrayList<Item> stock = new ArrayList<>();
-        stock.add(gameboyBackground);
-        stock.add(retroBackground);
-        stock.add(vuBackground);
+        stock.add(backgroundFactory.getBackground("Gameboy"));
+        stock.add(backgroundFactory.getBackground("1996 Tamagotchi"));
+        stock.add(backgroundFactory.getBackground("VU \"NU\" Building"));
         this.backgroundShop = new Shop("Background Shop", stock);
 
         addAdditionalComponents();
@@ -70,7 +68,7 @@ public class BackgroundUI extends BaseUI {
         });
 
         button.setOnMouseExited(event -> {
-            FXGL.getGameScene().setBackgroundRepeat(user.getActiveBackground().getBackgroundImage());
+            FXGL.getGameScene().setBackgroundRepeat(backgroundFactory.getBackground(user.getActiveBackground()).getBackgroundImage());
             getBottomBar().getChildren().clear();
             getBottomBar().getChildren().add(balanceDisplay);
         });
@@ -80,7 +78,7 @@ public class BackgroundUI extends BaseUI {
         Button button = createIconButton(iconPath, getTopBar());
         backgroundButtonHoverEffect(button, background);
         button.setOnAction(event -> {
-            user.setActiveBackground(background);
+            user.setActiveBackground(background.getName());
             FXGL.getGameScene().addUINode(new MainUI(getClockBar()));
         });
     }
