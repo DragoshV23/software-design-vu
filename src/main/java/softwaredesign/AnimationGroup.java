@@ -35,6 +35,14 @@ public class AnimationGroup {
                 addToGroup(pet, LifeStage.ADULT, State.IDLE, "llamaIdle_a.png", 2, Duration.seconds(1));
                 addToGroup(pet, LifeStage.ADULT, State.SLEEP, "llamaSleep_a.png", 15, Duration.seconds(7));
                 addToGroup(pet, LifeStage.ADULT, State.ANGRY, "llamaAngry_a.png", 6, Duration.seconds(3));
+                break;
+            case CAT:
+                addToGroup(pet, LifeStage.KID, State.IDLE, "catIdle_b.png",  2, Duration.seconds(1));
+                addToGroup(pet, LifeStage.KID, State.SLEEP, "catSleep_b.png",  17, Duration.seconds(6));
+                addToGroup(pet, LifeStage.KID, State.ANGRY, "catAngry_b.png",  2, Duration.seconds(2));
+                addToGroup(pet, LifeStage.KID, State.IDLE, "catIdle_a.png",  2, Duration.seconds(1));
+                addToGroup(pet, LifeStage.KID, State.SLEEP, "catSleep_a.png",  17, Duration.seconds(6));
+                addToGroup(pet, LifeStage.KID, State.ANGRY, "catAngry_a.png",  2, Duration.seconds(2));
         }
     }
 
