@@ -81,7 +81,8 @@ public class MainUI extends BaseUI {
         button3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
+                HBox newClockBar = Main.createClock();
+                FXGL.getGameScene().addUINode(new MainUI(newClockBar));
             }
         });
         // save/creates saveFile.txt

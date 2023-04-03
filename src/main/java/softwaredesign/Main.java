@@ -144,8 +144,12 @@ public class Main extends GameApplication {
 
     @Override
     protected void initUI() {
-//        Font.loadFont(digital.ttf);
+        HBox clockBar = createClock();
 
+        // Add the UI to the game scene
+        FXGL.getGameScene().addUINode(new MainUI(clockBar));
+    }
+    public static HBox createClock() {
         // Creating clock
         HBox clockBar = new HBox();
         clockBar.setPrefSize(FXGL.getAppWidth(), 8 * 16);
@@ -156,7 +160,7 @@ public class Main extends GameApplication {
         Label timerLabel = new Label("00:00:00");
 
         timerLabel.setText("00:00:00");
-        timerLabel.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 35));
+        timerLabel.setFont(Font.loadFont(getGameScene().getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 35));
         final LocalTime[] time = {LocalTime.MIDNIGHT};
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
@@ -172,9 +176,7 @@ public class Main extends GameApplication {
         timeline.play();
 
         clockBar.getChildren().add(timerLabel);
-
-        // Add the UI to the game scene
-        FXGL.getGameScene().addUINode(new MainUI(clockBar));
+        return clockBar;
     }
 
     static void checkIfDead(HBox clockBar){
