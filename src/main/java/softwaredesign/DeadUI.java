@@ -20,11 +20,11 @@ public class DeadUI extends BaseUI {
     }
     private void addAdditionalComponents() {
         Button resetButton = createIconButton("undo.png", getBottomBar());
-        String deadMessage = pet.getName() + checkCauseDead();
+        String deadMessage = pet.getName() + " " + checkCauseDead();
         Label label = new Label(deadMessage);
 
         label.setTextFill(Color.WHITE);
-        label.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 20));
+        label.setFont(Font.loadFont(getClass().getResource("/assets/fonts/PressStart2P-Regular.ttf").toExternalForm(), 15));
         getTopBar().getChildren().add(label);
 
         resetButton.setOnAction(new EventHandler<ActionEvent>() {
