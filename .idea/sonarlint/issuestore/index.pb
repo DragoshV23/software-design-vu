@@ -6,8 +6,6 @@ X
 `
 0src/main/java/softwaredesign/AnimationGroup.java,f\f\ff67cf7eef3a33477db81e42b996a7de8e244998
 V
-&src/main/java/softwaredesign/Food.java,2\b\2b7b9e770ea993245b4e765e4ab84050219bf139
-V
 &src/main/java/softwaredesign/Shop.java,5\d\5d5d186f72fa6eb145ae01c6b1664c7dbae8d7e3
 Z
 *src/main/java/softwaredesign/MiniGame.java,0\c\0c04d107cd77a7cc93e1c428974088e26941b52f
