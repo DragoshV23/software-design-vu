@@ -214,9 +214,6 @@ public class Main extends GameApplication {
                 if(pet.getState() != State.DEAD) {
                     if (pet.getSecondsAlive() % 10 == 0) {
                         pet.birthday();
-                        pet.birthday();
-                        pet.birthday();
-                        pet.birthday();
                         animatePet();
                     }
                 }
