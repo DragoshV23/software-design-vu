@@ -27,7 +27,7 @@ public class MainUI extends BaseUI {
 
         //TOP BUTTONS
         Button shopButton = createIconButton("shopping-cart.png", getTopBar());
-        Button statsButton = createIconButton("graph.png", getTopBar());
+        Button showerButton = createIconButton("shower.png", getTopBar());
         Button resetClockButton = createIconButton("resetClock.png", getTopBar());
         Button saveButton = createIconButton("diskette.png", getTopBar());
 
@@ -35,7 +35,8 @@ public class MainUI extends BaseUI {
         Button foodButton = createIconButton("knife-and-fork.png", getBottomBar());
         Button rpsButton = createIconButton("games.png", getBottomBar());
         Button sleepButton = createIconButton("sleep.png", getBottomBar());
-        Button showerButton = createIconButton("shower.png", getBottomBar());
+        Button statsButton = createIconButton("graph.png", getBottomBar());
+
 
         //Popup
         Popup popup = new Popup();
@@ -89,9 +90,9 @@ public class MainUI extends BaseUI {
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                Main.saveUser();
                 if (pet.getStage() != LifeStage.EGG)
-//                    System.out.println(pet.getAge());
-                    Main.save();
+                    Main.savePet();
             }
         });
 

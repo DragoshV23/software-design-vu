@@ -34,8 +34,9 @@ public class Main extends GameApplication {
         settings.setHeight(37 * 16);
         settings.setWidth(32 * 16);
     }
-    Pet pet = loadOrCreatePet(); // ensures singleton object instance is only 1 and loaded
-    static User user = User.getInstance();
+
+    Pet _pet = loadOrCreatePet(); // ensures singleton object instance is only 1 and loaded
+    User _user = loadOrCreateUser(); // ensures singleton object instance is only 1 and loaded
     public HBox clock;
     public static UiFactory uiFactory = new UiFactory();
     public static void animatePet() {
@@ -44,7 +45,7 @@ public class Main extends GameApplication {
     }
     static Entity petEntity;
 
-    public static void save() {
+    public static void savePet() {
         Pet pet = Pet.getInstance();
         try {
             FileOutputStream f = new FileOutputStream(new File("saveFile.txt"));
@@ -81,13 +82,46 @@ public class Main extends GameApplication {
         }
         return null;
     }
+    private static User loadUser() {
+        try {
+            User userLoad = User.getInstance();
+            FileInputStream f = new FileInputStream(new File("userFile.txt"));
+            ObjectInputStream o = new ObjectInputStream(f);
+            User.instance = (User) o.readObject();
+            f.close();
+            o.close();
+
+            return userLoad;
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream");
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static void saveUser() {
+        User user = User.getInstance();
+        try {
+            FileOutputStream f = new FileOutputStream(new File("userFile.txt"));
+            ObjectOutputStream o = new ObjectOutputStream(f);
+            o.writeObject(user);
+            o.close();
+            f.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream User");
+        }
+    }
 
     @Override
     protected void initGame() {
-        loadOrCreatePetEntity();
-        Background defaultBackground = new Background("Default", 0, "white.png");
-        user.setActiveBackground(defaultBackground);
         clock = createClock();
+        loadOrCreatePetEntity(clock);
         reducePetStats(Duration.seconds(6), clock);
     }
 
@@ -99,8 +133,16 @@ public class Main extends GameApplication {
             return Pet.getInstance();
         }
     }
+    static User loadOrCreateUser() {
+        File f = new File("userFile.txt");
+        if(f.exists() && !f.isDirectory()) {
+            return loadUser();
+        } else {
+            return User.getInstance();
+        }
+    }
 
-    private static void loadOrCreatePetEntity() {
+    private static void loadOrCreatePetEntity(HBox clock) {
         File f = new File("saveFile.txt");
         if(f.exists() && !f.isDirectory()) {
             Pet pet = loadPet();
@@ -138,6 +180,7 @@ public class Main extends GameApplication {
                 // Check if user entered a name and set the pet's name
                 pet.birthday();
                 petEntity.getComponent(AnimationComponent.class).setAnim(pet);
+                FXGL.getGameScene().addUINode(uiFactory.getUi("MAIN", clock));
             }, Duration.seconds(10));
         }
     }
@@ -160,10 +203,14 @@ public class Main extends GameApplication {
 
     @Override
     protected void initUI() {
+        User user = User.getInstance();
         HBox clockBar = createClock();
+        BackgroundFactory backgroundFactory = new BackgroundFactory();
+        System.out.println(user.getActiveBackground());
+        FXGL.getGameScene().setBackgroundRepeat(backgroundFactory.getBackground(user.getActiveBackground()).getBackgroundImage());
 
         // Add the UI to the game scene
-        FXGL.getGameScene().addUINode(uiFactory.getUi("MAIN", clockBar));
+        FXGL.getGameScene().addUINode(uiFactory.getUi("EGG", clockBar));
     }
     public static HBox createClock() {
         // Creating clock

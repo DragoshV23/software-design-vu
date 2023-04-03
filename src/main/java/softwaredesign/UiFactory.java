@@ -16,6 +16,8 @@ public class UiFactory {
                 return new DeadUI(clockBar);
             case "BACKGROUND":
                 return new BackgroundUI(clockBar);
+            case "EGG":
+                return new EggUI(clockBar);
             default:
                 return null;
         }
